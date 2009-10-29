@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="configuration.xsd">
+	<name>overall</name>
+	<configuration>
+      <name>Application</name>
+      <configuration-file fileName="nvs.xml" />
+    </configuration>
+    <configuration>
+		<name>Connection</name>
+		<configuration-file fileName="livelink.xml"/>
+        <configuration-file fileName="database.xml" />
+    </configuration>
+    <configuration>
+      <name>EMail</name>
+      <configuration-file fileName="mailer.xml" />
+    </configuration>
+    <configuration>
+		<name>Logon Filter</name>
+		<attribute>
+			<name>Cookie Name</name>
+			<type>java.lang.String</type>
+			<value>EEOCLivelink</value>
+		</attribute>
+	</configuration>
+    <configuration>
+        <name>URL Macro Decoder</name>
+        <attribute>
+            <name>Livelink Decoder</name>
+            <type>java.lang.String</type>
+            <value>com.momentumsystems.livelink.util.URLMacroDecoder</value>
+        </attribute>
+    </configuration>
+	<configuration-file fileName="implementationFactory.xml"/>
+</configuration>

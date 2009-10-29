@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+    <!-- Holds message management stuff -->
+    <bean id="messageManagement" class="com.momentumsystems.notification.spring.MessageManagementSpringImpl">
+        <property name="sender">
+            <ref local="mailSender"/>
+        </property>
+        <property name="systemInfo">
+            <ref bean="systemConfiguration"/>
+        </property>
+    </bean>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host">
+            <value>exchange</value>
+        </property>
+        <property name="username">
+            <value></value>
+        </property>
+        <property name="password">
+            <value></value>
+        </property>
+    </bean>
+
+
+</beans>

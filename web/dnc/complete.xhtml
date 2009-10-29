@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ice="http://www.icesoft.com/icefaces/component">
+<ui:composition template="/layout/layout.xhtml">
+     <ui:define name="pageTitle"><h:outputText value="Daily News Clips"/></ui:define>
+     <ui:define name="pageName"><ice:outputText  styleClass="pageName" value="Daily News Clips"/></ui:define>
+     <ui:define name="faceletBody">
+<ice:form id="dncConfirmation" style="margin: 0px; padding: 0px;">
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <table>
+        <tr>
+          <td>Your news clips have been successfully submitted for inSite intranet upload.</td>
+        </tr>
+        <tr>
+            <td>The document file name is<ice:outputText value=" "/><ice:outputText id="dncId" value="#{DncItem.fileName}" />.</td>
+        </tr>
+        <tr></tr>
+        <tr>
+          <td>Click<ice:outputText value=" "/>
+                   <ice:outputLink id="dncFolder" value="#{DncItem.folderUrl}" target="_blank">
+              here</ice:outputLink>
+              to display the file location in the News Clips Archive
+          </td>
+        </tr>
+        <tr></tr>
+        <tr>
+          <td><ice:commandButton value="Print" onclick="window.print();return false;"/></td>
+        </tr>
+    </table>
+  </body>
+</ice:form>
+</ui:define>
+</ui:composition>
+</html>

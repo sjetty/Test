@@ -1,0 +1,1201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ice="http://www.icesoft.com/icefaces/component">
+<!-- file: html/base.html -->
+<head>
+<link rel="stylesheet" type="text/css" href="../common/images/livelink.css" />
+<!--<link rel="stylesheet" type="text/css" href="../common/stylesheet.css" />-->
+<link rel="stylesheet" type="text/css" href="../css/overrides.css" />
+<!--<link rel="stylesheet" type="text/css" href="/xmlhttp/css/xp.css" />-->
+<!--<link rel="stylesheet" type="text/css" href="/css/default.css" />-->
+<style type="text/css">
+ .errorClass {color:red;}
+ .browserow1 { background-color: #ffffff;  }
+ .browserow2 { background-color: #eeeeee;  }
+ .chickletimage { behavior: url('../common/images/pngbehavior.htc'); }
+</style>
+<title>
+    <ui:insert name="pageTitle">
+        <h:outputText value="#{msgs['default.pageName']}"/>
+    </ui:insert>
+</title>
+<!-- file: commonsetup.html -->
+<script type="text/javascript" src="../common/images/global.js"></script>
+<script type="text/javascript" src="../common/images/globalmenu.js"></script>
+<script type="text/javascript" src="../common/images/globalmenus.js"></script>
+<script type="text/javascript" src="../common/images/newsticker.js"></script>
+<script type="text/javascript" src="../common/images/functionmenu.js"></script>
+<script type="text/javascript" src="../common/images/menu.js"></script>
+<!--<script>
+baseURL = "/livelink/livelink.exe"
+</script>-->
+<!--<base href="http://mosys30.momentumsystems.com:8180/" />-->
+<!-- file: headercontainer.html -->
+<!-- file: appearances/appearanceheadercomponent.html -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var OBJECT_DATAID = "2000"
+var	OBJECT_NAME = "Enterprise"
+var OBJECT_CREATOR = "Admin"
+var OBJECT_CREATEDATE = "07/22/2002"
+var OBJECT_MODIFYDATE = "03/23/2007"
+var OBJECT_COMMENTS = ""
+/* ]]> */
+</script>
+<!-- file: appearances/appearanceheadercomponent.html -->
+<!-- end file: headercontainer.html -->
+</head>
+<!--<body onload="javascript:onLoadFunc('`img`');">-->
+<body>
+<ui:param name="LivelinkBaseUrl" value="#{ApplicationBean.systemInfo.baseUrl}" />
+<ui:param name="LivelinkServerUrl" value="#{ApplicationBean.systemInfo.serverUrl}" />
+<a href="#skip" rel="skip" title="Skip Navigation Links">
+<img alt="Skip Navigation Links" src="../common/images/px.gif" border="0" height="1" width="1" />
+</a>
+<!--<div id="functionMenuParent">-->
+<!--<iframe id="bridgeFrame" src="../common/images/spacer.gif" title="hidden frame">-->
+<!--</iframe>-->
+<!--</div>-->
+<table border="0" width="100%" class="pageBody" style="height: 100%;" cellpadding="0" cellspacing="0">
+<!-- file: topcomponent.html -->
+<!-- end file: topcomponent.html -->
+<tr>
+<!-- file: leftcomponent.html -->
+<td id="LLOuterContainer" style="height: 100%;" valign="top">
+<!-- file: webnode/browse.html -->
+<!-- file: llmastheadcomponent.html -->
+<table id="LLInnerContainer" class="pageBody" style="height: 100%;" cellspacing="0" cellpadding="0" width="100%" border="0">
+<tr>
+<td  valign="top" >
+<div id="mastheadComponent">
+<table id="titleComponent" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-image: url( ../common/images/enterpriseheader.gif ); background-repeat: repeat-x;">
+<tr id="mastHeadRow">
+<td nowrap="nowrap" align="left" valign="middle"><img src="../common/images/28enterprise.gif" alt="enterprise workspace" align="top" width="52" height="44" border="0" /></td>
+<td nowrap="nowrap" valign="middle" width="100%">
+<div id="headerTitle1"><h:outputText value="#{msgs['pageHeader.title']}"/></div>
+<div id="headerTitle2">
+    <ui:insert name="pageName">
+        <h:outputText value="#{msgs['default.pageName']}"/>
+    </ui:insert>
+</div>
+</td>
+<td>
+<img height="31" alt="" src="../common/images/enterpriseheader_divider.gif" width="2" border="0" />
+</td>
+<td align="middle" valign="middle" nowrap="nowrap">
+<div id="headerUserName"><h:outputText value="#{mosysUserInformation.displayName}" /></div>
+<div id="headerCurrentDate">
+    <script type="text/javascript">
+          document.write("&nbsp;"+ getDate() + "&nbsp;")
+    </script>
+</div>
+</td>
+<td>
+<img height="31" alt="" src="../common/images/enterpriseheader_divider.gif" width="2" border="0" />
+</td>
+<td nowrap="nowrap" align="right">
+<h:outputLink value="#{LivelinkBaseUrl}?func=ll.index"><img class="chickletImage" src="../common/images/chicklet.png" align="right" hspace="8" alt="about livelink" width="83" height="30" border="0" /></h:outputLink>
+</td>
+</tr>
+</table>
+<table cellspacing="0" cellpadding="0" border="0" width="100%">
+<tr>
+<td width="100%" valign="top" class="quicklinkbar">
+<!-- file: searchcomponent.html -->
+<!-- begin file: websbroker/searchbar.html -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var allSearchTypes = new Array('fulltext','nickname','nlq','searchInProgress','MARKER')
+var lastOpen = -1
+var lastWidget = 'nlq'
+var detailedSearchOpen = 'false'
+function ShowDetailSearch( widget )
+{
+    //alert("detail search")
+    lastWidget = widget
+    var theSearchForm = document.forms[widget + 'SearchBarForm']  // eval('document.' + widget + 'SearchBarForm')
+    if (!(navigator.platform=='MacPPC' && navigator.appName=='Microsoft Internet Explorer'))
+    {
+        document.getElementById('detailSearchOpen').style.left= detSearchXPos(document.getElementById('searchBarColumn')) + 2
+        document.getElementById('detailSearchOpen').style.top = detSearchYPos(window.document.getElementById('searchBarColumn')) + 4
+    }
+    if (detailedSearchOpen == 'false')
+    {
+        document.getElementById('detFrame').src='/livelink/livelink.exe?func=srch.DetailSearch'
+        detailedSearchOpen = 'true'
+    }
+    document.getElementById('detailSearchOpen').style.zIndex='2';
+    document.getElementById('detailSearchOpen').style.visibility='visible';
+    if(String(theSearchForm.where1) != 'undefined' && String(detFrame.document.forms['searchFrm']) != 'undefined')
+    {
+        //alert("here")
+        detFrame.setFullTextValue();
+    }
+    for ( x=0; x<allSearchTypes.length; x++ ) {
+        if ( allSearchTypes[x] != 'MARKER' ) {
+            var div = document.getElementById( allSearchTypes[x] + 'mainDivId' )
+            if ( div.style.display != 'none' ) {
+                lastOpen = x
+                div.style.display = 'none'
+            }
+        }
+    }
+    //alert("detail search end")
+}
+function detSearchXPos(obj)
+{
+var xPos = 0
+if (obj.parentNode != null)
+{
+xPos = obj.offsetLeft + detSearchXPos(obj.parentNode)
+}
+return xPos
+}
+function detSearchYPos(obj)
+{
+var yPos = 0
+if (obj.parentNode != null)
+{
+yPos = obj.offsetTop + detSearchYPos(obj.parentNode)
+}
+return yPos
+}
+function detResize()
+{
+if (document.getElementById('detailSearchOpen').style.visibility=='visible')
+{
+ShowDetailSearch(lastWidget);
+}
+}
+function HideDetailSearch( isCancel )
+{
+document.getElementById('detailSearchOpen').style.visibility='hidden';
+var theSearchForm = document.forms[lastWidget + 'SearchBarForm'] //eval('document.' + lastWidget + 'SearchBarForm')
+if ( (!isCancel) && String(theSearchForm.where1) != 'undefined' )
+{
+theSearchForm.where1.value = top.window.frames["detFrame"].document.searchForm.where1.value;
+}
+document.getElementById( allSearchTypes[lastOpen] + 'mainDivId' ).style.display = 'block'
+}
+function changeSearchType( makeThisVisible ) {
+var y
+var z
+var lastWhere1 = ''
+var allSearchTypes = new Array('fulltext','nickname','nlq','searchInProgress','MARKER')
+//alert(makeThisVisible)
+for ( y=0; y<allSearchTypes.length; y++)
+{
+    var myform = allSearchTypes[y] + "SearchBarForm";
+    if ( allSearchTypes[y] != 'MARKER' )
+    {
+        //alert(allSearchTypes[y] + 'mainDivId')
+        thisType = document.getElementById( allSearchTypes[y] + 'mainDivId' )
+       // alert("thisType" + thisType)
+        if (allSearchTypes[y] != 'searchInProgress' )
+        {
+            //if ( eval('document.' + allSearchTypes[y] + 'SearchBarForm.nlq' ) )
+            if (document.forms[myform].elements["nlq"])
+            {
+                //alert("in if")
+                //lastWhere1 = eval('document.' + allSearchTypes[y] + 'SearchBarForm.nlq.value') }
+                lastWhere1 = document.forms[myform].elements["nlq"]
+            }
+            else
+            {
+                //alert("in else")
+                //lastWhere1 = eval('document.' + allSearchTypes[y] + 'SearchBarForm.where1.value')
+                lastWhere1 = document.forms[myform].elements['where1']
+            }
+        }
+        thisType.style.display='none'
+        if ( allSearchTypes[y] == makeThisVisible ) {
+            z = y
+        }
+        if ( allSearchTypes[y] != 'searchInProgress') {
+            document.forms[myform].elements[allSearchTypes[y] + 'submitButton'].disabled = true
+            //eval('document.' + allSearchTypes[y] + 'SearchBarForm.submitButton.disabled = true')
+        }
+    }
+}//for
+//alert("after for")
+
+thisType = document.getElementById( allSearchTypes[z] + 'mainDivId' )
+//alert(allSearchTypes[z])
+thisType.style.display='block'
+
+if ( allSearchTypes[z] != 'searchInProgress')
+{
+    //eval('document.' + allSearchTypes[z] + 'SearchBarForm.submitButton.disabled = false')
+    document.forms[allSearchTypes[z] + "SearchBarForm"].elements[allSearchTypes[z] + 'submitButton'].disabled = false
+    //alert("submitButton not disabled")
+    if ( makeThisVisible == "nlq" )
+    {
+        lastWhere1 = document.forms[allSearchTypes[z] + 'SearchBarForm'].elements["nlq"]
+        //alert("is nlq")
+        document.forms[allSearchTypes[z] + 'SearchBarForm'].elements["nlq"].focus()
+        //eval('document.' + allSearchTypes[z] + 'SearchBarForm.nlq.value = lastWhere1')
+        //eval('document.' + allSearchTypes[z] + 'SearchBarForm.nlq.focus()')
+    }
+    else
+    {
+        lastWhere1 = document.forms[allSearchTypes[z] + 'SearchBarForm'].elements["where1"]
+        //alert("2nd else")
+        document.forms[allSearchTypes[z] + 'SearchBarForm'].elements["where1"].focus()
+        //eval('document.' + allSearchTypes[z] + 'SearchBarForm.where1.value = lastWhere1')
+        //eval('document.' + allSearchTypes[z] + 'SearchBarForm.where1.focus()')
+    }
+}
+//alert("after last if")
+}//function
+
+/* ]]> */
+</script>
+<!-- moved from line 210 -->
+<!--[if IE]>
+<script type="text/javascript">
+<![CDATA[
+window.onresize = detResize;
+]]>
+</script>
+<![endif]-->
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+<tr>
+<td width="2" style="background-repeat:repeat-x; background-image:url(../common/images/search-header-gray.gif)"><img height="56" alt="" src="../common/images/left-search.gif" width="2" /></td>
+<td class="searchBar" nowrap="nowrap" style="background-repeat: repeat-x; padding-top: 4px; padding-bottom: 0; width:100%; background-image:url(../common/images/search-header-gray.gif)" height="56" id="searchBarColumn">
+<div class="detailSearchFrame" id="detailSearchOpen" style="position: absolute; z-index: -1; visibility: hidden">
+<iframe title="hidden frame" src="../common/images/spacer.gif" scrolling="no" width="500" height="400" style="text-align:center" frameborder="0" id="detFrame">
+</iframe>
+</div>
+<!-- begin file: websbroker/searchbar_fulltext.html -->
+<div id="fulltextmainDivId" style="display:none">
+<form style="margin-bottom:0;" method="post" id="fulltextSearchBarForm" action="#{ApplicationBean.systemInfo.baseUrl}" onsubmit="return false">
+<input type="hidden" name="locationId" value="" />
+<input type="hidden" name="locationName" value="" />
+<input type="hidden" name="withinQuery" value="" />
+<input type="hidden" name="slice" value="" />
+<!-- moved from line 272 -->
+<input type="hidden" id="lookfor1" value="allwords" />
+<!-- moved from line 368 -->
+<input type="hidden" name="func" value="search" />
+<input type="hidden" name="search_type" value="newGUI" />
+<input type="hidden" name="objType" value="258" />
+<input type="hidden" name="objAction" id="objAction" value="NewSearch" />
+<input type="hidden" name="TypeOfSearch" value="newGUI" />
+<input type="hidden" name="SearchBarSearch" value="TRUE" />
+<input type="hidden" name="FromHereExpanded" id="FromHereExpanded" value="" />
+<input type="hidden" name="searchfor" value="" />
+<input type="hidden" name="searchBarSearch" value="TRUE" />
+<input type="hidden" name="fulltextMode" id="fulltextMode" value="" />
+<table id="searchBarTbl" cellspacing="2" cellpadding="0" style="width: 100%" width="1%" border="0">
+<tr class="searchBar" valign="bottom" style="padding-bottom: 2px;">
+<td class="searchBut" id="searchBarTopRow" nowrap="nowrap" valign="bottom">
+<!-- begin file: websbroker/searchbartypeselect.html -->
+<script type="text/javascript">
+/* <![CDATA[ */
+function showSearchTypeMenu( rootedAt ) {
+var menu = document.getElementById( rootedAt );
+menu.style.left = getX( menu.parentNode );
+showMenu( rootedAt );
+}
+/* ]]> */
+</script>
+<div id="showSearchTypeMenu" class="addItemMenuSelect" onclick="javascript:showSearchTypeMenu('showfulltextSearchTypeSelect');return false;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td style="padding: 1px; padding-right: 4px;"><img alt="" src="../common/images/spacer.gif" width="1" height="1" /></td>
+<td width="100%" id="showSearchTypeMenuSelectTitle" class="selectTitle"><a title="Select Search Type" href="javascript:showMenu( 'showSearchTypeMenu', '' );return false;" style="font-size:11px">Search Livelink for</a></td>
+<td><img title="Select Search Type" class="selectArrow" alt="" src="../common/images/selectarrow.png" width="19" height="17" /></td>
+</tr>
+</table>
+<div id="showfulltextSearchTypeSelect" class="menu">
+<div id="fulltextfulltextmenuDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'fulltextfulltextmenuDivId' );"
+onmouseout="javascript:loLight( 'fulltextfulltextmenuDivId' );"
+onclick="javascript:loLight( 'fulltextfulltextmenuDivId' ); changeSearchType('fulltext');" >
+<a href="javascript:loLight( 'fulltextfulltextmenuDivId' ); changeSearchType('fulltext');" style="font-size:11px; width:100%;">Search Livelink for</a>
+</div>
+<div id="fulltextnicknamemenuDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'fulltextnicknamemenuDivId' );"
+onmouseout="javascript:loLight( 'fulltextnicknamemenuDivId' );"
+onclick="javascript:loLight( 'fulltextnicknamemenuDivId' ); changeSearchType('nickname');" >
+<a href="javascript:loLight( 'fulltextnicknamemenuDivId' ); changeSearchType('nickname');" style="font-size:11px; width:100%;">Search for a Livelink Nickname</a>
+</div>
+<div id="fulltextnlqmenuDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'fulltextnlqmenuDivId' );"
+onmouseout="javascript:loLight( 'fulltextnlqmenuDivId' );"
+onclick="javascript:loLight( 'fulltextnlqmenuDivId' ); changeSearchType('nlq');" >
+<a href="javascript:loLight( 'fulltextnlqmenuDivId' ); changeSearchType('nlq');" style="font-size:11px; width:100%;">Ask Livelink a Question</a>
+</div>
+</div>
+</div>
+<!-- end file: websbroker/searchbartypeselect.html -->
+</td>
+<!--moved to line 214 <input type="hidden" id="lookfor1" value="allwords" />-->
+<td nowrap="nowrap">
+<img src="../common/images/spacer.gif" alt="" width="3" height="1" />
+</td>
+<td class="searchBut" id="searchBarCell" align="left" valign="bottom" nowrap="nowrap">
+<!-- begin file: websbroker/searchbar_dhtml_dropdown.html -->
+<input type="hidden" id="ScopeSelection" value="239341|2000|Within Enterprise" />
+<script type="text/javascript">
+/* <![CDATA[ */
+var lastRootedAt = ''
+function fulltextShowslicesMenu( rootedAt ) {
+var menu = document.getElementById( rootedAt );
+menu.style.left = getX( menu.parentNode );
+lastRootedAt = rootedAt
+showMenu( rootedAt );
+}
+function fulltextChangeslices( selectedIndex )
+{
+    alert("selected index: " + selectedIndex)
+    if ( selectedIndex == 2 )
+    {
+        // then the user selected the From here (expanded) option
+        document.forms["fulltextSearchBarForm"].locationId.value = '2000';
+        document.forms["fulltextSearchBarForm"].locationName.value = 'Within+Enterprise';
+        document.forms["fulltextSearchBarForm"].withinQuery.value = 'YES';
+        document.forms["fulltextSearchBarForm"].FromHereExpanded.value = 'TRUE';
+        document.forms["fulltextSearchBarForm"].submitButton.disabled = true;
+        document.forms["fulltextSearchBarForm"].submitButton.name = 'TRUE';
+        document.forms["fulltextSearchBarForm"].objAction.value = 'searchPrompt';
+        document.forms["fulltextSearchBarForm"].func.value = 'll';
+        document.forms["fulltextSearchBarForm"].submit()
+    }
+    if ( selectedIndex == 3 )
+    {
+        // then the user selected the - divider, which makes no sense - set it back to the From Here option
+        selectedIndex = 1
+        document.forms["fulltextSearchBarForm"].ScopeSelection.value = '239341%7C2000%7CWithin+Enterprise';
+    }
+
+    document.getElementById('selectedfulltextslices').innerHTML = document.getElementById('fulltext' + selectedIndex + 'slicesDivId').innerHTML
+    document.getElementById('showfulltextslices').style.visibility = "hidden"
+}
+/* ]]> */
+</script>
+<div id="fulltextslicesMenu" class="addItemMenuSelect" style="clear:none; width:100%" onclick="javascript:fulltextShowslicesMenu('showfulltextslices');return false;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td style="padding: 1px; padding-right: 4px;"><img alt="" src="../common/images/spacer.gif" width="1" height="1" /></td>
+<td width="100%" id="slicesmenuselecttitle" class="selecttitle">
+<div id="selectedfulltextslices" onclick="javascript:showMenu( 'fulltextslicesMenu', '' );return false">
+<a title="Select Search Type" href="javascript:showMenu( 'fulltextslicesMenu', '' );return false" style="font-size:11px">From Here</a>
+</div>
+</td>
+<td><img title="select search type" class="selectArrow" alt="" src="../common/images/selectarrow.png" width="19" height="17" /></td>
+</tr>
+</table>
+<div id="showfulltextslices" class="menu">
+<div id="fulltext1slicesDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'fulltext1slicesDivId' );"
+onmouseout="javascript:loLight( 'fulltext1slicesDivId' );"
+onclick="document.forms['fulltextSearchBarForm'].ScopeSelection.value = '239341%7C2000%7CWithin+Enterprise'; fulltextChangeslices('1');">
+<a href="javascript:document.forms['fulltextSearchBarForm'].ScopeSelection.value = '239341%7C2000%7CWithin+Enterprise'; fulltextChangeslices('1');" style="font-size:11px; width:100%;">From Here</a>
+</div>
+<div id="fulltext2slicesDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'fulltext2slicesDivId' );"
+onmouseout="javascript:loLight( 'fulltext2slicesDivId' );"
+onclick="document.forms['fulltextSearchBarForm'].ScopeSelection.value = '%2Flivelink%2Flivelink%2Eexe%3Ffunc%3Dll%26objType%3D258%26objAction%3Dsearchprompt%26locationId%3D2000%26locationName%3DWithin%2BEnterprise%26withinQuery%3DYES%26FromHereExpanded%3DTRUE'; fulltextChangeslices('2');">
+<a href="javascript:document.forms['fulltextSearchBarForm'].ScopeSelection.value = '%2Flivelink%2Flivelink%2Eexe%3Ffunc%3Dll%26objType%3D258%26objAction%3Dsearchprompt%26locationId%3D2000%26locationName%3DWithin%2BEnterprise%26withinQuery%3DYES%26FromHereExpanded%3DTRUE'; fulltextChangeslices('2');" style="font-size:11px; width:100%;">From Here (Expanded)...</a>
+</div>
+<div id="fulltext3slicesDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'fulltext3slicesDivId' );"
+onmouseout="javascript:loLight( 'fulltext3slicesDivId' );"
+onclick="document.forms['fulltextSearchBarForm'].ScopeSelection.value = ''; fulltextChangeslices('3');">
+<a href="javascript:document.forms['fulltextSearchBarForm'].ScopeSelection.value = ''; fulltextChangeslices('3');" style="font-size:11px; width:100%;">--------</a>
+</div>
+<div id="fulltext4slicesDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'fulltext4slicesDivId' );"
+onmouseout="javascript:loLight( 'fulltext4slicesDivId' );"
+onclick="javascript:document.forms['fulltextSearchBarForm'].ScopeSelection.value = '239341'; fulltextChangeslices('4');">
+<a href="javascript:document.forms['fulltextSearchBarForm'].ScopeSelection.value = '239341'; fulltextChangeslices('4');" style="font-size:11px; width:100%;">Enterprise</a>
+</div>
+<div id="fulltext5slicesDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'fulltext5slicesDivId' );"
+onmouseout="javascript:loLight( 'fulltext5slicesDivId' );"
+onclick="javascript:document.forms['fulltextSearchBarForm'].ScopeSelection.value = '239343'; fulltextChangeslices('5');">
+<a href="javascript:document.forms['fulltextSearchBarForm'].ScopeSelection.value = '239343'; fulltextChangeslices('5');" style="font-size:11px; width:100%;">Enterprise [All Versions]</a>
+</div>
+</div>
+</div>
+<!-- end file: websbroker/searchbar_dhtml_dropdown.html -->
+</td>
+<td valign="bottom" class="searchBut" align="left" width="100%" nowrap="nowrap">
+<img src="../common/images/spacer.gif" alt="" width="1" height="1" />
+<img border="0" src="../common/images/searchbar-separator.gif" alt="" style="vertical-align:bottom;" height="19" />
+<img src="../common/images/spacer.gif" alt="" width="1" height="1" />
+<h:outputLink value="javascript:ShowDetailSearch('fulltext');"><img border="0" alt="detailed search" src="../common/images/det-search_down-arrow2.gif" style="vertical-align:text-bottom;" title="detailed search" /></h:outputLink>
+<h:outputLink value="#{LivelinkBaseUrl}?func=ll&amp;objType=258&amp;objAction=searchprompt" title="Advanced Search"><img title="Advanced Search" alt="Advanced Search" border="0" src="../common/images/advanced-button.gif" style="vertical-align:text-bottom;" /></h:outputLink>
+</td>
+<td nowrap="nowrap"></td>
+</tr>
+<!-- moved to line 214 <input type="hidden" name="func" value="search" />
+<input type="hidden" name="search_type" value="newGUI" />
+<input type="hidden" name="objType" value="258" />
+<input type="hidden" name="objAction" id="objAction" value="NewSearch" />
+<input type="hidden" name="TypeOfSearch" value="newGUI" />
+<input type="hidden" name="SearchBarSearch" value="TRUE" />
+<input type="hidden" name="FromHereExpanded" id="FromHereExpanded" value="" />
+<input type="hidden" name="searchfor" value="" />
+<input type="hidden" name="searchBarSearch" value="TRUE" />
+<input type="hidden" name="fulltextMode" id="fulltextMode" value="" />-->
+<tr class="searchbar" id="searchBarActionRow">
+<td colspan="4" class="searchBut" style="width: 100%" nowrap="nowrap">
+<input title="Type search terms in the form of keywords" name="where1" style="width: 100%" id="fulltextwhere1" onkeypress="javascript:fulltextMSIEKeypress();" />
+</td>
+<td class="searchBut" id="searchButtonOnSearchBar" style="padding: 2px; padding-top: 0; padding-bottom: 0;" align="left" nowrap="nowrap">
+<input class="searchButton" style="width: 50px" type="button" value="Go" name="submitButton" id="fulltextsubmitButton" title="Click to search" onclick="fulltextSearchBarSubmit();" />
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+/* <![CDATA[ */
+function fulltextSearchBarSubmit()
+{
+    //alert("fulltextSearchBarSubmit");
+    if ( !document.getElementById('detailSearchOpen') || document.getElementById('detailSearchOpen').style.visibility=='hidden')
+    {
+
+        var fromHere = true
+        var searchField
+        searchField = document.forms["fulltextSearchBarForm"].elements["where1"]
+        //alert(searchField)
+        if ( searchField.value.length < 1 )
+        {
+            alert ( "There is an empty query. Please enter a valid one" )
+            searchField.focus()
+            return false
+        }
+        //alert("2nd in fulltextSearchBarSubmit");
+        var scopeSelection = document.forms["fulltextSearchBarForm"].ScopeSelection
+        var fromhereexpanded = document.forms["fulltextSearchBarForm"].FromHereExpanded
+        if (fromhereexpanded.value && 1 == scopeSelection.selectedIndex)
+        {
+            alert ( "Cannot perform a search against From Here (Expanded)." )
+            return false
+        }
+        //alert("3nd")
+        document.forms["fulltextSearchBarForm"].func.value = 'search'
+        document.forms["fulltextSearchBarForm"].fulltextMode.value = document.forms["fulltextSearchBarForm"].lookfor1.value
+        document.forms["fulltextSearchBarForm"].slice.value = scopeSelection.value
+        document.forms["fulltextSearchBarForm"].submit();
+    }
+}
+
+function fulltextMSIEKeypress() {
+    if (window.event.keyCode == '13') {
+        //alert('keyCode is 13');
+        fulltextSearchBarSubmit();
+    }
+}
+ /* ]]> */
+</script>
+</form>
+</div>
+<!-- end file: websbroker/searchbar_fulltext.html -->
+<!-- file: nickname/searchbar_nickname.html -->
+<div id="nicknamemainDivId" style="display:none">
+<form style="margin-bottom:0;" method="post" name="nicknameSearchBarForm" id="nicknameSearchBarForm" action="#{ApplicationBean.systemInfo.baseUrl}" onsubmit="return false">
+<!-- moved from line 530 -->
+<input type="hidden" name="func" value="nickname.lookup" />
+<input type="hidden" name="nickname" value="" />
+<table id="searchBarTbl" cellspacing="2" cellpadding="0" style="width: 100%" width="1%" border="0">
+<tr class="searchBar" valign="bottom" style="padding-bottom: 2px;">
+<td class="searchBut" id="searchBarTopRow" nowrap="nowrap" valign="bottom" width="1%">
+<!-- begin file: websbroker/searchbartypeselect.html -->
+<script type="text/javascript">
+/* <![CDATA[ */
+function showSearchTypeMenu( rootedAt ) {
+var menu = document.getElementById( rootedAt );
+menu.style.left = getX( menu.parentNode );
+showMenu( rootedAt );
+}
+/* ]]> */
+</script>
+<div id="showSearchTypeMenu" class="addItemMenuSelect" onclick="showSearchTypeMenu('shownicknameSearchTypeSelect');return false;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td style="padding: 1px; padding-right: 4px;"><img alt="" src="../common/images/spacer.gif" width="1" height="1" /></td>
+<td width="100%" id="showSearchTypeMenuSelectTitle" class="selectTitle"><a title="Select Search Type" href="javascript:showMenu( 'showSearchTypeMenu', '' );return false" style="font-size:11px">Search for a Livelink Nickname</a></td>
+<td><img title="Select Search Type" class="selectArrow" alt="" src="../common/images/selectarrow.png" width="19" height="17" /></td>
+</tr>
+</table>
+<div id="shownicknameSearchTypeSelect" class="menu">
+<div id="nicknamefulltextmenuDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'nicknamefulltextmenuDivId' );"
+onmouseout="javascript:loLight( 'nicknamefulltextmenuDivId' );"
+onclick="loLight( 'nicknamefulltextmenuDivId' ); changeSearchType('fulltext');" >
+<a href="javascript:loLight( 'nicknamefulltextmenuDivId' ); changeSearchType('fulltext');" style="font-size:11px; width:100%;">Search Livelink for</a>
+</div>
+<div id="nicknamenicknamemenuDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'nicknamenicknamemenuDivId' );"
+onmouseout="javascript:loLight( 'nicknamenicknamemenuDivId' );"
+onclick="loLight( 'nicknamenicknamemenuDivId' ); changeSearchType('nickname');" >
+<a href="javascript:loLight( 'nicknamenicknamemenuDivId' ); changeSearchType('nickname');" style="font-size:11px; width:100%;">Search for a Livelink Nickname</a>
+</div>
+<div id="nicknamenlqmenuDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'nicknamenlqmenuDivId' );"
+onmouseout="javascript:loLight( 'nicknamenlqmenuDivId' );"
+onclick="loLight( 'nicknamenlqmenuDivId' ); changeSearchType('nlq');" >
+<a href="javascript:loLight( 'nicknamenlqmenuDivId' ); changeSearchType('nlq');" style="font-size:11px; width:100%;">Ask Livelink a Question</a>
+</div>
+</div>
+</div>
+<!-- end file: websbroker/searchbartypeselect.html -->
+</td>
+<td nowrap="nowrap">
+<img src="../common/images/spacer.gif" alt="" width="3" height="1" />
+</td>
+<td class="searchBut" id="searchBarCell" align="left" valign="bottom" nowrap="nowrap">
+<!-- begin file: websbroker/searchbar_dhtml_dropdown.html -->
+<input type="hidden" id="action" name="action" value="open" />
+<script type="text/javascript">
+/* <![CDATA[ */
+var lastRootedAt = ''
+function nicknameShowactionMenu( rootedAt ) {
+var menu = document.getElementById( rootedAt );
+menu.style.left = getX( menu.parentNode );
+lastRootedAt = rootedAt
+showMenu( rootedAt );
+}
+function nicknameChangeaction( selectedIndex ) {
+
+document.getElementById('selectednicknameaction').innerHTML = document.getElementById('nickname' + selectedIndex + 'actionDivId').innerHTML
+document.getElementById('shownicknameaction').style.visibility = "hidden"
+}
+/* ]]> */
+</script>
+<div id="nicknameactionMenu" class="addItemMenuSelect" style="clear:none; width:100%;" onclick="javascript:nicknameShowactionMenu('shownicknameaction');return false;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td style="padding: 1px; padding-right: 4px;"><img alt="" src="../common/images/spacer.gif" width="1" height="1" /></td>
+<td width="100%" id="actionMenuSelectTitle" class="selectTitle">
+<div id="selectednicknameaction" onclick="javascript:showMenu( 'nicknameactionMenu', '' );return false">
+<a title="Select Search Type" href="javascript:showMenu( 'nicknameactionMenu', '' );return false" style="font-size:11px">Open</a>
+</div>
+</td>
+<td><img title="Select Search Type" class="selectArrow" alt="" src="../common/images/selectarrow.png" width="19" height="17" /></td>
+</tr>
+</table>
+<div id="shownicknameaction" class="menu">
+<div id="nickname1actionDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'nickname1actionDivId' );"
+onmouseout="javascript:loLight( 'nickname1actionDivId' );"
+onclick="javascript:document.nicknameSearchBarForm.action.value = 'open'; nicknameChangeaction('1');">
+<a href="javascript:document.nicknameSearchBarForm.action.value = 'open'; nicknameChangeaction('1');" style="font-size:11px; width:100%;">Open</a>
+</div>
+<div id="nickname2actionDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'nickname2actionDivId' );"
+onmouseout="javascript:loLight( 'nickname2actionDivId' );"
+onclick="javascript:document.nicknameSearchBarForm.action.value = 'info'; nicknameChangeaction('2');">
+<a href="javascript:document.nicknameSearchBarForm.action.value = 'info'; nicknameChangeaction('2');" style="font-size:11px; width:100%;">Properties</a>
+</div>
+</div>
+</div>
+<!-- end file: websbroker/searchbar_dhtml_dropdown.html -->
+</td>
+<td nowrap="nowrap" width="100%">
+<img src="../common/images/spacer.gif" alt="" width="3" height="1" />
+</td>
+<td nowrap="nowrap"></td>
+</tr>
+<!-- moved to line 428 <input type="hidden" name="func" value="nickname.lookup" />
+<input type="hidden" name="nickname" value="" />-->
+<tr class="searchbar" id="searchBarActionRow">
+<td colspan="4" class="searchBut" style="width: 100%" nowrap="nowrap">
+<label for="nicknamenickname"></label>
+<input title="Nickname: Type the nickname of the item." name="where1" style="width: 100%" id="nicknamenickname" onkeypress="javascript:nicknameMSIEKeypress();" />
+</td>
+<td class="searchBut" id="searchButtonOnSearchBar" style="padding: 2px; padding-top: 0; padding-bottom: 0;" align="left" nowrap="nowrap">
+<input class="searchButton" style="width: 50px" type="button" value="go" name="submitButton" id="nicknamesubmitButton" title="Click to search" onclick="nicknameSearchBarSubmit();" />
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+/* <![CDATA[ */
+function nicknameSearchBarSubmit()
+{
+if ( !document.getElementById('detailSearchOpen') || document.getElementById('detailSearchOpen').style.visibility=='hidden')
+{
+document.nicknameSearchBarForm.nickname.value = document.nicknameSearchBarForm.where1.value
+var fromHere = true
+var searchField
+searchField = document.nicknameSearchBarForm.nickname
+if ( searchField.value.length < 1 )
+{
+alert ( "There is an empty query. Please enter a valid one" )
+searchField.focus()
+return false
+}
+document.nicknameSearchBarForm.submit()
+}
+}
+function nicknameMSIEKeypress() {
+if(window.event.keyCode == '13') {
+nicknameSearchBarSubmit()
+}
+}
+/* ]]> */
+</script>
+</form>
+</div>
+<!-- end file: nickname/searchbar_nickname.html -->
+<!-- begin file: nlqsearch/searchbar_nlq.html -->
+<div id="nlqmainDivId" style="display:block">
+<form style="margin-bottom:0;" method="post" id="nlqSearchBarForm" action="#{ApplicationBean.systemInfo.baseUrl}" onsubmit="return false">
+<input type="hidden" name="locationId" value="" />
+<input type="hidden" name="locationName" value="" />
+<input type="hidden" name="withinQuery" value="" />
+<input type="hidden" name="slice" value="" />
+<!-- moved from line 624 -->
+<input type="hidden" id="NLQMode" name="NLQMode" value="LivelinkAware" />
+<!-- moved from line 633 -->
+<input type="hidden" id="ScopeSelection" value="239341|2000|Within Enterprise" />
+<!-- moved from line 735 -->
+<input type="hidden" name="func" value="search" />
+<input type="hidden" name="search_type" value="newGUI" />
+<input type="hidden" name="objType" value="258" />
+<input type="hidden" name="objAction" value="NewSearch" />
+<input type="hidden" name="TypeOfSearch" value="newGUI" />
+<input type="hidden" name="SearchBarSearch" value="TRUE" />
+<input type="hidden" name="FromHereExpanded" value="" />
+<input type="hidden" name="searchfor" value="" />
+<input type="hidden" name="queryType" value="nlqComponent" />
+<input type="hidden" name="where1" value="" />
+<table id="searchBarTbl" cellspacing="2" cellpadding="0" style="width:100%" width="1%" border="0">
+<tr class="searchBar" valign="bottom" style="padding-bottom: 2px;">
+<td valign="bottom" class="searchBut" id="searchBarTopRow" nowrap="nowrap">
+<!-- begin file: websbroker/searchbartypeselect.html -->
+<script type="text/javascript">
+/* <![CDATA[ */
+function showSearchTypeMenu( rootedAt ) {
+var menu = document.getElementById( rootedAt );
+menu.style.left = getX( menu.parentNode );
+showMenu( rootedAt );
+}
+/* ]]> */
+</script>
+<div id="showSearchTypeMenu" class="addItemMenuSelect" onclick="javascript:showSearchTypeMenu('shownlqSearchTypeSelect');return false;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td style="padding: 1px; padding-right: 4px;"><img alt="" src="../common/images/spacer.gif" width="1" height="1" /></td>
+<td width="100%" id="showSearchTypeMenuSelectTitle" class="selectTitle"><a title="select search type" href="javascript:showMenu( 'showSearchTypeMenu', '' );return false" style="font-size:11px">Ask Livelink a Question</a></td>
+<td><img title="Select Search Type" class="selectArrow" alt="" src="../common/images/selectarrow.png" width="19" height="17" /></td>
+</tr>
+</table>
+<div id="shownlqSearchTypeSelect" class="menu">
+<div id="nlqfulltextmenuDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'nlqfulltextmenuDivId' );"
+onmouseout="javascript:loLight( 'nlqfulltextmenuDivId' );"
+onclick="javascript:loLight( 'nlqfulltextmenuDivId' ); changeSearchType('fulltext');" >
+<a href="javascript:loLight( 'nlqfulltextmenuDivId' ); changeSearchType('fulltext');" style="font-size:11px; width:100%;">Search Livelink for</a>
+</div>
+<div id="nlqnicknamemenuDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'nlqnicknamemenuDivId' );"
+onmouseout="javascript:loLight( 'nlqnicknamemenuDivId' );"
+onclick="javascript:loLight( 'nlqnicknamemenuDivId' ); changeSearchType('nickname');" >
+<a href="javascript:loLight( 'nlqnicknamemenuDivId' ); changeSearchType('nickname');" style="font-size:11px; width:100%;">Search for a Livelink Nickname</a>
+</div>
+<div id="nlqnlqmenuDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'nlqnlqmenuDivId' );"
+onmouseout="javascript:loLight( 'nlqnlqmenuDivId' );"
+onclick="javascript:loLight( 'nlqnlqmenuDivId' ); changeSearchType('nlq');" >
+<a href="javascript:loLight( 'nlqnlqmenuDivId' ); changeSearchType('nlq');" style="font-size:11px; width:100%;">Ask Livelink a Question</a>
+</div>
+</div>
+</div>
+<!-- end file: websbroker/searchbartypeselect.html -->
+</td>
+<!-- moved to line 580 <input type="hidden" id="NLQMode" name="NLQMode" value="LivelinkAware" />-->
+<td class="searchBut" nowrap="nowrap">
+<img src="../common/images/spacer.gif" alt="" width="3" height="1" />
+</td>
+<td class="searchBut" id="searchBarCell" align="left" valign="bottom" nowrap="nowrap">
+<!-- begin file: websbroker/searchbar_dhtml_dropdown.html -->
+<!-- moved to line 582 <input type="hidden" id="ScopeSelection" name="ScopeSelection" value="239341|2000|Within Enterprise" />-->
+<script type="text/javascript">
+/* <![CDATA[ */
+var lastRootedAt = ''
+function nlqShowslicesMenu( rootedAt ) {
+var menu = document.getElementById( rootedAt );
+menu.style.left = getX( menu.parentNode );
+lastRootedAt = rootedAt
+showMenu( rootedAt );
+}
+function nlqChangeslices( selectedIndex ) {
+
+//alert("selectedIndex: " + selectedIndex)
+if ( selectedIndex == 2 ) {
+// then the user selected the From here (expanded) option
+document.forms["nlqSearchBarForm"].locationId.value = '2000';
+document.forms["nlqSearchBarForm"].locationName.value = 'Within+Enterprise';
+document.forms["nlqSearchBarForm"].withinQuery.value = 'YES';
+document.forms["nlqSearchBarForm"].FromHereExpanded.value = 'TRUE';
+document.forms["nlqSearchBarForm"].submitButton.disabled = true;
+document.forms["nlqSearchBarForm"].submitButton.name = 'TRUE';
+document.forms["nlqSearchBarForm"].objAction.value = 'searchPrompt';
+document.forms["nlqSearchBarForm"].func.value = 'll';
+document.forms["nlqSearchBarForm"].submit()
+}
+if ( selectedIndex == 3 ) {
+// then the user selected the - divider, which makes no sense - set it back to the From Here option
+selectedIndex = 1
+document.forms["nlqSearchBarForm"].ScopeSelection.value = '239341%7C2000%7CWithin+Enterprise';
+//    alert("in 3")
+}
+
+document.getElementById('selectednlqslices').innerHTML = document.getElementById('nlq' + selectedIndex + 'slicesDivId').innerHTML
+document.getElementById('shownlqslices').style.visibility = "hidden"
+}
+
+/* ]]> */
+</script>
+<div id="nlqslicesMenu" class="addItemMenuSelect" style="clear:none; width:100%" onclick="javascript:nlqShowslicesMenu('shownlqslices');return false;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td style="padding: 1px; padding-right: 4px;"><img alt="" src="../common/images/spacer.gif" width="1" height="1" /></td>
+<td width="100%" id="slicesMenuSelectTitle" class="selectTitle">
+<div id="selectednlqslices" onclick="javascript:showMenu( 'nlqslicesMenu', '' );return false">
+<a title="Select Search Type" href="javascript:showMenu( 'nlqslicesMenu', '' );return false" style="font-size:11px">From Here</a>
+</div>
+</td>
+<td><img title="Select Search Type" class="selectArrow" alt="" src="../common/images/selectarrow.png" width="19" height="17" /></td>
+</tr>
+</table>
+<div id="shownlqslices" class="menu">
+<div id="nlq1slicesDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'nlq1slicesDivId' );"
+onmouseout="javascript:loLight( 'nlq1slicesDivId' );"
+onclick="document.forms['nlqSearchBarForm'].ScopeSelection.value = '239341%7C2000%7CWithin+Enterprise'; nlqChangeslices('1');">
+<a href="javascript:document.forms['nlqSearchBarForm'].ScopeSelection.value = '239341%7C2000%7CWithin+Enterprise'; nlqChangeslices('1');" style="font-size:11px; width:100%;">From Here</a>
+</div>
+<div id="nlq2slicesDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'nlq2slicesDivId' );"
+onmouseout="javascript:loLight( 'nlq2slicesDivId' );"
+onclick="document.forms['nlqSearchBarForm'].ScopeSelection.value = '%2Flivelink%2Flivelink%2Eexe%3Ffunc%3Dll%26objType%3D258%26objAction%3Dsearchprompt%26locationId%3D2000%26locationName%3DWithin%2BEnterprise%26withinQuery%3DYES%26FromHereExpanded%3DTRUE'; nlqChangeslices('2');">
+<a href="javascript:document.forms['nlqSearchBarForm'].ScopeSelection.value = '%2Flivelink%2Flivelink%2Eexe%3Ffunc%3Dll%26objType%3D258%26objAction%3Dsearchprompt%26locationId%3D2000%26locationName%3DWithin%2BEnterprise%26withinQuery%3DYES%26FromHereExpanded%3DTRUE'; nlqChangeslices('2');" style="font-size:11px; width:100%;">From Here (Expanded)...</a>
+</div>
+<div id="nlq3slicesDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'nlq3slicesDivId' );"
+onmouseout="javascript:loLight( 'nlq3slicesDivId' );"
+onclick="document.forms['nlqSearchBarForm'].ScopeSelection.value = ''; nlqChangeslices('3');">
+<a href="javascript:document.forms['nlqSearchBarForm'].ScopeSelection.value = ''; nlqChangeslices('3');" style="font-size:11px; width:100%;">--------</a>
+</div>
+<div id="nlq4slicesDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'nlq4slicesDivId' );"
+onmouseout="javascript:loLight( 'nlq4slicesDivId' );"
+onclick="document.forms['nlqSearchBarForm'].ScopeSelection.value = '239341'; nlqChangeslices('4');">
+<a href="javascript:document.forms['nlqSearchBarForm'].ScopeSelection.value = '239341'; nlqChangeslices('4');" style="font-size:11px; width:100%;">Enterprise</a>
+</div>
+<div id="nlq5slicesDivId" class="menuItem" style="width:100%;"
+onmouseover="javascript:hiLight( 'nlq5slicesDivId' );"
+onmouseout="javascript:loLight( 'nlq5slicesDivId' );"
+onclick="document.forms['nlqSearchBarForm'].ScopeSelection.value = '239343'; nlqChangeslices('5');">
+<a href="javascript:document.forms['nlqSearchBarForm'].ScopeSelection.value = '239343'; nlqChangeslices('5');" style="font-size:11px; width:100%;">Enterprise [All Versions]</a>
+</div>
+</div>
+</div>
+<!-- end file: websbroker/searchbar_dhtml_dropdown.html -->
+</td>
+<td valign="bottom" class="searchBut" align="left" width="100%" nowrap="nowrap">
+<img src="../common/images/spacer.gif" alt="" width="1" height="1" />
+<img border="0" src="../common/images/searchbar-separator.gif" alt="" style="vertical-align:bottom;" height="19" />
+<img src="../common/images/spacer.gif" alt="" width="1" height="1" />
+<h:outputLink value="javascript:openURL( '#{LivelinkBaseUrl}?func=ll&amp;objType=258&amp;objAction=searchprompt', '' )" title="Advanced Search">
+    <img title="Advanced Search" alt="Advanced Search" border="0" src="../common/images/advanced-button.gif" style="vertical-align:text-bottom;" /></h:outputLink>
+</td>
+<td nowrap="nowrap">
+</td>
+</tr>
+<!-- moved to line 584 <input type="hidden" name="func" value="search" />
+<input type="hidden" name="search_type" value="newGUI" />
+<input type="hidden" name="objType" value="258" />
+<input type="hidden" name="objAction" value="NewSearch" />
+<input type="hidden" name="TypeOfSearch" value="newGUI" />
+<input type="hidden" name="SearchBarSearch" value="TRUE" />
+<input type="hidden" name="FromHereExpanded" value="" />
+<input type="hidden" name="searchfor" value="" />
+<input type="hidden" name="queryType" value="nlqComponent" />
+<input type="hidden" name="where1" value="" />-->
+<tr class="searchbar" id="searchBarActionRow">
+<td colspan="4" class="searchBut" style="width:100%;" nowrap="nowrap">
+<input title="Type search terms in the form of a question" style="width:100%;" name='nlq' id="nlqInput" maxlength="2048"  onkeypress="javascript:nlqMSIEKeypress();" />
+</td>
+<td class="searchBut" id="searchButtonOnSearchBar" style="padding: 2px; padding-top: 0; padding-bottom: 0;" align="left" nowrap="nowrap">
+<input class="searchButton" style="width: 50px;" type="button" value="Go" name="submitButton" id="nlqsubmitButton" title="Click to search" onclick="nlqSearchBarSubmit();" />
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+/* <![CDATA[ */
+function nlqSearchBarSubmit()
+{
+    //alert("nlqSearchBarSubmit")
+    if ( !document.getElementById('detailSearchOpen') || document.getElementById('detailSearchOpen').style.visibility=='hidden')
+    {
+        var fromHere = true
+        var searchField
+        //alert("in if");
+        //searchField = document.nlqSearchBarForm.nlq
+
+        searchField = document.forms["nlqSearchBarForm"].elements["nlq"]
+        //alert("searchField: " + searchField);
+        if ( searchField.value.length < 1 )
+        {
+            alert ( "There is an empty query. Please enter a valid one" )
+            searchField.focus()
+            return false
+        }
+        var scopeSelection = document.forms["nlqSearchBarForm"].ScopeSelection
+        var fromhereexpanded = document.forms["nlqSearchBarForm"].FromHereExpanded
+        if (fromhereexpanded.value && 1 == scopeSelection.selectedIndex)
+        {
+            alert ( "Cannot perform a search against From Here (Expanded)." )
+            return false
+        }
+        document.forms["nlqSearchBarForm"].func.value = 'search'
+        document.forms["nlqSearchBarForm"].slice.value = scopeSelection.value
+        document.forms["nlqSearchBarForm"].where1.value = ''
+        document.forms["nlqSearchBarForm"].submit();
+    }
+    //alert("end nlqSearchBarSubmit");
+}
+function nlqMSIEKeypress() {
+if(window.event.keyCode == '13') {
+nlqSearchBarSubmit();
+}
+}
+/* ]]> */
+</script>
+</form>
+</div>
+<!-- end file: nlqsearch/searchbar_nlq.html -->
+<div id="searchInProgressmainDivId" style="display:none">
+<table>
+<tr><td> </td></tr>
+<tr><td>Please wait while your request is being processed - this may take a few moments...</td></tr>
+</table>
+</div>
+</td>
+<td nowrap="nowrap" class="quicklink" rowspan="2" valign="top" height="100%">
+<img height="100%" alt="" src="../common/images/header-corner.gif" width="34" />
+</td>
+</tr>
+<tr>
+<td width="2" style="background-image:url(../common/images/shad.gif)" height="5"><img height="5" alt="" src="../common/images/shad1.gif" width="2" /></td>
+<td style="background-image:url(../common/images/shad.gif)" height="5"><img height="5" alt="" src="../common/images/shad.gif" width="1" /></td>
+</tr>
+</table>
+<!-- end file: websbroker/searchbar.html -->
+<!-- end file: searchcomponent.html -->
+</td>
+<td width="100%" valign="top" class="quicklinkBar">
+<!-- file: webnode/menucomponent.html -->
+<script type="text/javascript">
+/* <![CDATA[ */
+__LeavePage = ''
+function getArrowBlack()
+{
+return '../common/images/global-down-arrow.gif'
+}
+function getArrowRed()
+{
+return '../common/images/global-down-arrow-red.gif'
+}
+/* ]]> */
+</script>
+<!-- moved from line 963 -->
+<script type="text/javascript">
+/* <![CDATA[ */
+function openLinksWindow( url )
+{
+var helpWindow = window.open( url, "helpWin", "width=800,height=530,resizable,toolbar" )
+if ( helpWindow.focus )
+{
+helpWindow.focus()
+}
+}
+/* ]]> */
+</script>
+<table cellspacing="0" cellpadding="0" width="100%" border="0">
+<tr>
+<td rowspan="2"><img height="27" alt="" src="../common/images/global-menu-divider.gif" width="2" border="0" /></td>
+<td id="NVSGlobalMenu" height="24" style="background-image:url(../common/images/global-menu-bg.gif)" onclick="javascript:showGlobalMenu('NVS', 'NVSGlobalMenu' );return false">
+&nbsp;&nbsp;&nbsp;<a class="globalMenu" title="Select To Access NVS Menu" href="javascript:showGlobalMenu('', 'GlobalMenu' );return false" onclick="javascript:showGlobalMenu('NVS', 'NVSGlobalMenu' );return false" onmouseover="javascript:setArrowRed( 'NVS' )" onmouseout="javascript:setArrowBlack( 'NVS' )"><b>NVS</b>
+<img src="../common/images/global-down-arrow.gif" alt="Select To Access NVS Menu" hspace="3" width="5" align="middle" border="0" onmouseover="javascript:setArrowRed( 'NVS' )" onmouseout="javascript:setArrowBlack( 'NVS' )" id="NVSGlobalMenuImage" /></a>
+<!--<div id="NVS" class="menu">-->
+<!--<div id="NVS0" class="menuItem" onclick="javascript:menu_callback( '../menu/forward.jsf','');return false;"  onmouseover="javascript:hiLight('NVS0');doSubMenu( 'NVS0' )" onmouseout="javascript:loLight( 'NVS0')" style="width:100%;">-->
+<!--<a href="../menu/forward.jsf">NVS</a>-->
+<!--</div>-->
+<!--<div id="NVS1" class="menuItem" onclick="javascript:menu_callback( '../menu/forwardAdHoc.jsf','');return false;"  onmouseover="javascript:hiLight('NVS1');doSubMenu( 'NVS1' )" onmouseout="javascript:loLight( 'NVS1')" style="width:100%;">-->
+<!--<a href="../menu/forwardAdHoc.jsf">Ad Hoc Query</a>-->
+<!--</div>-->
+<div class="lastItemHilite"><img src="../common/images/spacer.gif" alt="" width="1" height="1" /></div>
+</div>
+</td>
+<td rowspan="2"><img height="27" alt="" src="../common/images/global-menu-divider.gif" width="2" border="0" /></td>
+<td id="PersonalGlobalMenu" height="24" style="background-image:url(../common/images/global-menu-bg.gif)" onclick="showGlobalMenu('Personal', 'PersonalGlobalMenu' );return false">
+&nbsp;&nbsp;&nbsp;<a class="GlobalMenu" title="Select To Access Personal Menu" href="javascript:showGlobalMenu('', 'GlobalMenu' );return false" onclick="showGlobalMenu('Personal', 'PersonalGlobalMenu');return false" onmouseover="setArrowRed( 'Personal' )" onmouseout="setArrowBlack( 'Personal' )"><b>Personal</b>
+<img src="../common/images/global-down-arrow.gif" height="7" alt="Select To Access Personal Menu" hspace="3" width="5" style="text-align:center;" border="0" onmouseover="setArrowRed( 'Personal' )" onmouseout="setArrowBlack( 'Personal' )" id="PersonalGlobalMenuImage" /></a>
+<div class="menuDivider"><img src="../common/images/spacer.gif" alt="" width="1" height="1" /></div>
+<div id="Personal" class="menu">
+<div id="a00" class="menuItem" onclick="menu_callback('#{LivelinkBaseUrl}?func=ll&amp;objtype=142&amp;objaction=browse','');return false;" onmouseover="hiLight('a00');doSubMenu( 'a00' )" onmouseout="loLight( 'a00')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=ll&amp;objtype=142&amp;objaction=browse">My Workspace</h:outputLink></div>
+<div id="a01" class="menuItem" onclick="menu_callback( '#{LivelinkServerUrl}/livelink/home.do?request=myhome.personal','');return false;" onmouseover="hiLight('a01');doSubMenu( 'a01' )" onmouseout="loLight( 'a01')" style="width:100%;"><h:outputLink value="#{LivelinkServerUrl}/livelink/home.do?request=myhome.personal">My Home</h:outputLink></div>
+<div class="menuDivider"><img src="../common/images/spacer.gif" alt="" width="1" height="1" /></div>
+<div id="a03" class="menuItem" onclick="menu_callback( '#{LivelinkBaseUrl}?func=Personal.Assignments','');return false;"  onmouseover="hiLight('a03');doSubMenu( 'a03' )" onmouseout="loLight( 'a03')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Personal.Assignments">Assignments</h:outputLink></div>
+<div id="a04" class="menuItem" onclick="menu_callback( '#{LivelinkBaseUrl}?func=Personal.MyCollections','');return false;"  onmouseover="javascript:hiLight('a04');doSubMenu( 'a04' )" onmouseout="javascript:loLight( 'a04')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Personal.MyCollections">Collections</h:outputLink>
+</div>
+<div id="a05" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Personal.Discussions','');return false;"  onmouseover="javascript:hiLight('a05');doSubMenu( 'a05' )" onmouseout="javascript:loLight( 'a05')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Personal.Discussions">Discussions</h:outputLink>
+</div>
+<div id="a06" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Personal.Favorites','');return false;"  onmouseover="javascript:hiLight('a06');doSubMenu( 'a06' )" onmouseout="javascript:loLight( 'a06')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Personal.Favorites">Favorites</h:outputLink>
+</div>
+<div id="a07" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Webexp.OfflineGetMarked','');return false;"  onmouseover="javascript:hiLight('a07');doSubMenu( 'a07' )" onmouseout="javascript:loLight( 'a07')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Webexp.OfflineGetMarked">Marked Items</h:outputLink>
+</div>
+<div id="a08" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Personal.MyGroups','');return false;"  onmouseover="javascript:hiLight('a08');doSubMenu( 'a08' )" onmouseout="javascript:loLight( 'a08')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Personal.MyGroups">My Groups</h:outputLink>
+</div>
+<div id="a09" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Personal.MyProfile','');return false;"  onmouseover="javascript:hiLight('a09');doSubMenu( 'a09' )" onmouseout="javascript:loLight( 'a09')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Personal.MyProfile">My Profile</h:outputLink>
+</div>
+<div id="a010" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Personal.News','');return false;"  onmouseover="javascript:hiLight('a010');doSubMenu( 'a010' )" onmouseout="javascript:loLight( 'a010')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Personal.News">News</h:outputLink>
+</div>
+<div id="a011" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Personal.Projects','');return false;"  onmouseover="javascript:hiLight('a011');doSubMenu( 'a011' )" onmouseout="javascript:loLight( 'a011')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Personal.Projects">Projects</h:outputLink>
+</div>
+<div id="a012" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Prospector.ProspectorTab','');return false;"  onmouseover="javascript:hiLight('a012');doSubMenu( 'a012' )" onmouseout="javascript:loLight( 'a012')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Prospector.ProspectorTab">Prospectors</h:outputLink>
+</div>
+<div id="a013" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Personal.Recommendations','');return false;"  onmouseover="javascript:hiLight('a013');doSubMenu( 'a013' )" onmouseout="javascript:loLight( 'a013')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Personal.Recommendations">Recommendations</h:outputLink>
+</div>
+<div id="a014" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Personal.Reports','');return false;"  onmouseover="javascript:hiLight('a014');doSubMenu( 'a014' )" onmouseout="javascript:loLight( 'a014')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Personal.Reports">Reports</h:outputLink>
+</div>
+<div id="a015" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Personal.ReservedItems','');return false;"  onmouseover="javascript:hiLight('a015');doSubMenu( 'a015' )" onmouseout="javascript:loLight( 'a015')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Personal.ReservedItems">Reserved Items</h:outputLink>
+</div>
+<div id="a016" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Personal.ManageTabs','');return false;"  onmouseover="javascript:hiLight('a016');doSubMenu( 'a016' )" onmouseout="javascript:loLight( 'a016')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Personal.ManageTabs">Search Templates</h:outputLink>
+</div>
+<div id="a017" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Personal.TaskLists','');return false;"  onmouseover="javascript:hiLight('a017');doSubMenu( 'a017' )" onmouseout="javascript:loLight( 'a017')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Personal.TaskLists">Task Lists</h:outputLink>
+</div>
+<div id="a018" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=work.workflows','');return false;"  onmouseover="javascript:hiLight('a018');doSubMenu( 'a018' )" onmouseout="javascript:loLight( 'a018')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=work.workflows">Workflows</h:outputLink>
+</div>
+<div class="lastItemHilite"><img src="../common/images/spacer.gif" alt="" width="1" height="1" /></div>
+</div>
+</td>
+<td rowspan="2"><img height="27" alt="" src="../common/images/global-menu-divider.gif" width="2" border="0" /></td>
+<td id="EnterpriseGlobalMenu" height="24" style="background-image:url(../common/images/global-menu-bg.gif)" onclick="javascript:showGlobalMenu('Enterprise', 'EnterpriseGlobalMenu' );return false">
+&nbsp;&nbsp;&nbsp;<a class="globalMenu" title="Select To Access Enterprise Menu" href="javascript:showGlobalMenu('', 'GlobalMenu' );return false" onclick="javascript:showGlobalMenu('Enterprise', 'EnterpriseGlobalMenu' );return false" onmouseover="javascript:setArrowRed( 'Enterprise' )" onmouseout="javascript:setArrowBlack( 'Enterprise' )"><b>Enterprise</b>
+<img src="../common/images/global-down-arrow.gif" height="7" alt="Select To Access Enterprise Menu" hspace="3" width="5" style="vertical-align:middle;" border="0" onmouseover="javascript:setArrowRed( 'Enterprise' )" onmouseout="javascript:setArrowBlack( 'Enterprise' )" id="EnterpriseGlobalMenuImage" /></a>
+<div id="Enterprise" class="menu">
+<div id="a10" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=llworkspace','');return false;"  onmouseover="javascript:hiLight('a10');doSubMenu( 'a10' )" onmouseout="javascript:loLight( 'a10')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=llworkspace">Workspace</h:outputLink>
+</div>
+<div id="a11" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=user.listusers','');return false;"  onmouseover="javascript:hiLight('a11');doSubMenu( 'a11' )" onmouseout="javascript:loLight( 'a11')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=user.listusers">Users &amp; Groups</h:outputLink>
+</div>
+<div class="menuDivider"><img src="../common/images/spacer.gif" alt="" width="1" height="1" /></div>
+<div id="a13" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Desktop.Desktop','');return false;"  onmouseover="javascript:hiLight('a13');doSubMenu( 'a13' )" onmouseout="javascript:loLight( 'a13')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Desktop.Desktop">Download Clients</h:outputLink>
+</div>
+<div id="a14" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Webexp.ExpOpenLLExplorer','');return false;"  onmouseover="javascript:hiLight('a14');doSubMenu( 'a14' )" onmouseout="javascript:loLight( 'a14')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=Webexp.ExpOpenLLExplorer">Livelink Explorer</h:outputLink>
+</div>
+<div class="lastItemHilite"><img src="../common/images/spacer.gif" alt="" width="1" height="1" /></div>
+</div>
+</td>
+<td rowspan="2"><img height="27" alt="" src="../common/images/global-menu-divider.gif" width="2" border="0" /></td>
+<td id="ToolsGlobalMenu" height="24" style="background-image:url(../common/images/global-menu-bg.gif)" onclick="javascript:showGlobalMenu('Tools', 'ToolsGlobalMenu' );return false">
+&nbsp;&nbsp;&nbsp;<a class="globalMenu" title="Select To Access Tools Menu" href="javascript:showGlobalMenu('', 'GlobalMenu' );return false" onclick="javascript:showGlobalMenu('Tools', 'ToolsGlobalMenu' );return false" onmouseover="javascript:setArrowRed( 'Tools' )" onmouseout="javascript:setArrowBlack( 'Tools' )"><b>Tools</b>
+<img src="../common/images/global-down-arrow.gif" height="7" alt="Select To Access Tools Menu" hspace="3" width="5" style="vertical-align:middle;" border="0" onmouseover="javascript:setArrowRed( 'Tools' )" onmouseout="javascript:setArrowBlack( 'Tools' )" id="ToolsGlobalMenuImage" /></a>
+<div id="Tools" class="menu">
+<div id="a20" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=ll&amp;objType=258&amp;objAction=searchprompt','');return false;"  onmouseover="javascript:hiLight('a20');doSubMenu( 'a20' )" onmouseout="javascript:loLight( 'a20')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=ll&amp;objType=258&amp;objAction=searchprompt">Search</h:outputLink>
+</div>
+<div class="menuDivider"><img src="../common/images/spacer.gif" alt="" width="1" height="1" /></div>
+<div id="a22" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=ll.logout','');return false;"  onmouseover="javascript:hiLight('a22');doSubMenu( 'a22' )" onmouseout="javascript:loLight( 'a22')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=ll.logout">Log-out</h:outputLink>
+</div>
+<div id="a23" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=personal.settings','');return false;"  onmouseover="javascript:hiLight('a23');doSubMenu( 'a23' )" onmouseout="javascript:loLight( 'a23')" style="width:100%;">
+<h:outputLink value="#{LivelinkBaseUrl}?func=personal.settings">Settings</h:outputLink>
+</div>
+<div class="lastItemHilite"><img src="../common/images/spacer.gif" alt="" width="1" height="1" /></div>
+</div>
+</td>
+<td rowspan="2"><img height="27" alt="" src="../common/images/global-menu-divider.gif" width="2" border="0" /></td>
+<td id="HelpGlobalMenu" height="24" style="background-image:url(../common/images/global-menu-bg.gif)" onclick="javascript:showGlobalMenu('Help', 'HelpGlobalMenu' );return false" onmouseout="javascript:setArrowBlack( 'Help' )">&nbsp;&nbsp;&nbsp;<a href="javascript:showGlobalMenu('Help', 'HelpGlobalMenu' );return false" onclick="javascript:showGlobalMenu('Help', 'HelpGlobalMenu' );return false" class="globalMenu" title="Select To Access Help Menu" onmouseover="javascript:setArrowRed( 'Help' )" onmouseout="javascript:setArrowBlack( 'Help' )"><b>Help</b>
+<img height="7" alt="Select To Access Help Menu" hspace="3" src="../common/images/global-down-arrow.gif" width="5" style="vertical-align:middle;" border="0" onmouseout="javascript:setArrowBlack( 'Help' )" onmouseover="javascript:setArrowRed( 'Help' )"  id="HelpGlobalMenuImage" /></a>
+<div id="Help" class="menu" style="min-width: 98px">
+<div id="Help0" class="menuItem" onclick="javascript:openLinksWindow( '#{LivelinkBaseUrl}?func=help.index&amp;keyword=admin.index' );return false;" onmouseover="javascript:hiLight('Help0')" onmouseout="javascript:loLight( 'Help0')" style="width:100%;">
+<a href="javascript:openLinksWindow( '#{LivelinkBaseUrl}?func=help.index&amp;keyword=admin.index' );return false;" onclick="javascript:openLinksWindow( '#{LivelinkBaseUrl}?func=help.index&amp;keyword=admin.index' );return false;">Contents</a>
+</div>
+<div id="Help1" class="menuItem" onclick="javascript:openLinksWindow( '#{LivelinkBaseUrl}?func=help.index&amp;keyword=LLWorkspace.VolLibrary.Browse' );return false;" onmouseover="javascript:hiLight('Help1')" onmouseout="javascript:loLight( 'Help1')" style="width:100%;">
+<a href="javascript:openLinksWindow( '#{LivelinkBaseUrl}?func=help.index&amp;keyword=LLWorkspace.VolLibrary.Browse' );return false;" onclick="javascript:openLinksWindow( '#{LivelinkBaseUrl}?func=help.index&amp;keyword=LLWorkspace.VolLibrary.Browse' );return false;">For This Page</a>
+</div>
+<div class="menuDivider"><img src="../common/images/spacer.gif" alt="" width="1" height="1" /></div>
+<div id="Help3" class="menuItem" onclick="javascript:menu_callback('#{LivelinkBaseUrl}' + '?func=ll.index', '' )" onmouseover="javascript:hiLight('Help3')" onmouseout="javascript:loLight( 'Help3')" style="width:100%;">
+<a href="javascript:menu_callback('#{LivelinkBaseUrl}?func=ll.index', '' )">About Livelink</a>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td style="background-image:url(../common/images/global-menu-shadow.gif)"><img height="3" alt="" src="../common/images/spacer.gif" width="98" border="0" /></td>
+<td style="background-image:url(../common/images/global-menu-shadow.gif)"><img height="3" alt="" src="../common/images/spacer.gif" width="98" border="0" /></td>
+<td style="background-image:url(../common/images/global-menu-shadow.gif)"><img height="3" alt="" src="../common/images/spacer.gif" width="98" border="0" /></td>
+<td style="background-image:url(../common/images/global-menu-shadow.gif)"><img height="3" alt="" src="../common/images/spacer.gif" width="98" border="0" /></td>
+</tr>
+<tr>
+<!-- moved to line 824 <script type="text/javascript">
+function openLinksWindow( url )
+{
+var helpWindow = window.open( url, "helpWin", "width=800,height=530,resizable,toolbar" )
+if ( helpWindow.focus )
+{
+helpWindow.focus()
+}
+}
+</script>-->
+<td width="1" class="quicklinkBarDivider"><img height="30" alt="" src="../common/images/px.gif" width="1" /></td>
+<td class="quickLink"  nowrap="nowrap" valign="top">
+<!--<div>-->
+<!--<a href="javascript:menu_callback('../menu/forward.jsf', '' )" target="_self"><img src="../common/images/personal-workspace.gif" alt="NVS" height="11" hspace="5" width="11" border="0" />NVS</a>-->
+<!--</div>-->
+<!--<div>-->
+<!--<a href="javascript:menu_callback('../menu/forwardAdHoc.jsf', '' )" target="_self"><img src="../common/images/personal-workspace.gif" alt="NVS" height="11" hspace="5" width="11" border="0" />Ad Hoc Query</a>-->
+<!--</div>-->
+</td>
+<td width="1" class="quicklinkBarDivider"><img height="30" alt="" src="../common/images/px.gif" width="1" /></td>
+<td class="quickLink"  nowrap="nowrap" valign="top">
+<div>
+<a href="javascript:menu_callback('#{LivelinkBaseUrl}%3Ffunc%3Dll%26objtype%3D142%26objaction%3Dbrowse', '' )" target="_self"><img src="../common/images/personal-workspace.gif" alt="My Workspace" height="11" hspace="5" width="11" border="0" />My Workspace</a>
+</div>
+<div>
+<a href="javascript:menu_callback('#{LivelinkServerUrl}%2Flivelink%2Fhome%2Edo%3Frequest%3Dmyhome%2Epersonal', '' )" target="_self"><img src="../common/images/personal-home.gif" alt="My Home" height="11" hspace="5" width="11" border="0" />My Home</a>
+</div>
+</td>
+<td width="1" class="quicklinkBarDivider"><img height="30" alt="" src="../common/images/px.gif" width="1" /></td>
+<td class="quickLink"  nowrap="nowrap" valign="top">
+<div>
+<a href="javascript:menu_callback('#{LivelinkBaseUrl}%3Ffunc%3Dllworkspace', '' )" target="_self"><img src="../common/images/enterprise-workspace.gif" alt="Workspace" height="11" hspace="5" width="11" border="0" />Workspace</a>
+<!--<img src="../common/images/enterprise-workspace.gif" alt="Workspace" height="11" hspace="5" width="11" border="0" />
+    <h:outputLink value="#{LivelinkBaseUrl}?func=llworkspace">Workspace</h:outputLink>-->
+</div>
+<div>
+<a href="javascript:menu_callback('#{LivelinkBaseUrl}%3Ffunc%3Duser%2Elistusers', '' )" target="_self"><img src="../common/images/enterprise-users.gif" alt="Users &amp; Groups" height="11" hspace="5" width="11" border="0" />Users &amp; Groups</a>
+</div>
+</td>
+<td width="1" class="quicklinkBarDivider"><img height="30" alt="" src="../common/images/px.gif" width="1" /></td>
+<td class="quickLink"  nowrap="nowrap" valign="top">
+<div>
+<a href="javascript:menu_callback('#{LivelinkBaseUrl}%3Ffunc%3Dll%2Elogout', '' )" target="_self"><img src="../common/images/tools-logout.gif" alt="Log-out" height="11" hspace="5" width="11" border="0" />Log-out</a>
+</div>
+<div>
+<a href="javascript:menu_callback('#{LivelinkBaseUrl}%3Ffunc%3Dpersonal%2Esettings', '' )" target="_self"><img src="../common/images/tools-settings.gif" alt="Settings" height="11" hspace="5" width="11" border="0" />Settings</a>
+</div>
+</td>
+<td width="1" rowspan="2" class="quicklinkBarDivider"><img height="30" alt="" src="../common/images/px.gif" width="1" /></td>
+<td class="quicklink"  nowrap="nowrap" valign="top">
+<div>                                                                                                                                                                                    e
+<a href="javascript:openLinksWindow( '#{LivelinkBaseUrl}%3Ffunc%3Dhelp%2Eindex%26keyword%3Dadmin%2Eindex' )" target="_self"><img src="../common/images/help-contents.gif" alt="Contents" height="11" hspace="5" width="11" border="0" />Contents</a>
+</div>
+<div>
+<a href="javascript:openLinksWindow( '#{LivelinkBaseUrl}%3Ffunc%3Dhelp%2Eindex%26keyword%3DLLWorkspace%252EVolLibrary%252EBrowse' )" target="_self"><img src="../common/images/help-thispage.gif" alt="For This Page" height="11" hspace="5" width="11" border="0" />For This Page</a>
+</div>
+</td>
+</tr>
+<!-- end file: quicklinks.html -->
+<tr>
+<td class="quicklinkBottom" colspan="8"><img height="1" alt="" src="../common/images/spacer.gif" border="0" /></td>
+</tr>
+</table>
+
+<!-- End File: menuComponent.html -->
+</td>
+</tr>
+</table>
+
+
+<table class="pageBody" width="100%" align="center" cellspacing="0" cellpadding="15" border="0">
+<tr>
+<td valign="top">
+<a name="top"/>
+<a name="skip" />
+
+
+<ui:insert name="faceletBody">Default Page Body</ui:insert>
+
+
+
+</td>
+</tr>
+</table>
+
+
+</div>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td>
+
+<table class="pageBody" border="0" cellpadding="0" cellspacing="0" width="100%" style="vertical-align:bottom;">
+<tr>
+<td valign="bottom" width="100%">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr class="footer">
+<td class="livelinkVersionAndCopyright" nowrap="nowrap" style="background-image:url(../common/images/footer-back.gif)" >
+<img height="28" src="../common/images/px.gif" alt="" width="5" style="vertical-align:middle;" />
+&nbsp;
+Livelink &reg; Version 9.5.0, Copyright &copy; 1995-2005 Open Text Inc.  All rights reserved.
+</td>
+</tr>
+</table>
+</td>
+<td  valign="bottom" width="100%" align="right">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr class="footer">
+<td class="livelinkVersionAndCopyright" nowrap="nowrap" style="background-image:url(../common/images/footer-back.gif)" >
+<img height="28" src="../common/images/px.gif" alt="" width="15" style="vertical-align:middle;" />
+For assistance please contact the<a href="mailto:support@momentumsystems.com">&nbsp;Contact Hotline</a>
+&nbsp;
+</td>
+</tr>
+</table>
+</td>
+<td valign="bottom" align="left"><a href="#top"><img src="../common/images/footer-gotop.gif" width="23" height="33" border="0" alt="top" /></a></td>
+<td valign="bottom">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr><td height="0" style="background-image:url(../common/images/footer-back.gif)"><img src="../common/images/px.gif" alt="" width="15" height="28" style="vertical-align:middle;" /></td></tr>
+</table>
+</td>
+</tr>
+</table>
+
+</td></tr></table>
+
+<!--<iframe id="hideselect" src="../common/images/spacer.gif" title="hidden frame" scrolling="no" frameborder="0"-->
+<!--style="position:absolute; top: 0px; left:0px; display:none;">-->
+<!--</iframe>-->
+<!--<div id="hideselectdiv" class="menuItem" style="position:absolute; z-index: 1; display:none; visibility:hidden">-->
+<!--<img src="../common/images/spacer.gif" alt="" width="1" height="1" />-->
+<!--</div>-->
+</body>
+</html>

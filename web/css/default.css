@@ -1,0 +1,230 @@
+body {
+   background-color: #ffffff;
+   color: #000000;
+   font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+   font-size: 12px;
+    /*font-family: 'Times New Roman',Times,serif;*/
+    /*font-size: 16px;*/
+   margin: 1px;
+}
+
+a:link, a:visited {
+  color: #045491;
+  font-weight : bold;
+}
+
+a:link:hover, a:visited:hover  {
+  color: #045491;
+  font-weight : bold;
+}
+
+.pageHeader {
+   background-color: #3c5f84;
+   border-bottom-color: #000a32;
+   border-bottom-style: solid;
+   border-bottom-width: 3px;
+   color: white;
+   font-family: 'Times New Roman',Times,serif;
+   font-size: 12px;
+   font-weight: bold;
+   height: 77px;
+   left: 0;
+   margin-bottom: 0;
+   margin-left: 0;
+   margin-right: 0;
+   margin-top: 0;
+   position: relative;
+   top: 0;
+   width: 100%
+}
+.pageHeader .headerTitle {
+   vertical-align: middle;
+   font-size: 24px;
+}
+.pageHeader td {
+    color: white
+}
+
+.pageMenu {
+   background-color: #5C83AB;
+   border: 0;
+   color: white;
+   font-family: 'Times New Roman',Times,serif;
+   font-size: 16px;
+   font-weight: bold;
+   vertical-align: middle;
+   /*
+   height: 24px;
+   */
+   left: 0;
+   margin-bottom: 0;
+   margin-left: 0;
+   margin-right: 0;
+   margin-top: 0;
+   position: relative;
+   top: 0;
+   width: 100%
+}
+
+.pageMenu a {
+    background-color : #5C83AB;
+    color: white;
+    padding-left : 2px;    
+    padding-right : 2px;    
+    /*
+    margin-left: 0;
+    margin-right: 0;
+    */
+}
+
+.pageMenu a:hover {
+    background-color: #3c5f84;
+    border-left-color: #a9bfd8;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #a9bfd8;
+    border-right-style: solid;
+    border-right-width: 1px;
+}
+
+.pageMenu a:visited {
+    color: white;
+}
+
+.pageMenu a:visited:hover {
+    color: white;
+    background-color: #3c5f84;
+    border-left-color: #a9bfd8;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #a9bfd8;
+    border-right-style: solid;
+    border-right-width: 1px;
+}
+
+
+.pageFooter {
+   background-color : #a9bfd8;
+   color: white;
+   font-family: 'Times New Roman',Times,serif;
+   font-size: 12px;
+   height: 16px;
+   left: 0;
+   position: relative;
+   top: 0;
+   width: 100%;  
+   z-index: -100;
+}
+
+/*  don't bother with playing with the page name in the footer for now
+    .pageFooter .pageName {
+    width: 70%;
+    top: 0;
+    right: 10px;
+    text-align: right;
+}*/
+
+.pageBody {
+   background-color: #f1f1f1;
+   left: 0;
+   padding: 16px;
+   margin: 0;
+   position: relative;
+   top: 0;
+   width: 100%;
+    /*
+    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Times New Roman',Times,serif;
+    font-size: 16px;
+    */
+}
+
+.pageBody .required {
+  color : red;
+  font-weight : bold;  
+}
+
+.lined {
+    border-bottom-color:gainsboro;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+}
+
+.noMargin {
+    padding: 0;
+    margin: 0;
+}
+
+table {
+    empty-cells: show;
+}
+
+/*
+  panelPopup demo
+*/
+
+.popupButton {
+    text-align: right;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    padding-right: 4px;
+}
+
+.popupTitle span {
+    text-align: left;
+    vertical-align: middle;
+    font-weight: bold;
+    padding: 4px;
+    color: #FFFFFF;
+    font-size: 1.0em;
+}
+
+.popupModalBody {
+
+    margin-top: 15px;
+
+}
+
+.popupModalBody input {
+    float: right;
+    margin-right: 2px;
+    margin-top: 40px;
+}
+
+.popupControls td {
+    vertical-align: middle;
+}
+
+.issueHeight {
+    height: 29px;
+}
+
+.issueWidth {
+    width: 30em;
+}
+/* the following skip styles were stollen from JimThatcher.com, used for skipping navigation */
+.skiplist {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.skip {
+	PADDING-RIGHT: 0px; DISPLAY: none; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; FONT-FAMILY: verdana, sans-serif; POSITION: absolute; TEXT-ALIGN: left
+}
+.skip {
+	DISPLAY: block
+}
+:unknown .skip {
+	DISPLAY: block
+}
+.skip A {
+	PADDING-RIGHT: 0.5em; DISPLAY: inline; PADDING-LEFT: 0.5em; Z-INDEX: 2; LEFT: -200em; PADDING-BOTTOM: 0px; WIDTH: 14em; PADDING-TOP: 0px; POSITION: absolute; TEXT-DECORATION: none
+}
+.skip A:unknown {
+	BORDER-RIGHT: #333 2px solid; BORDER-TOP: #333 2px solid; BACKGROUND: #555; LEFT: 0.5em; BORDER-LEFT: #333 2px solid; COLOR: #fff; BORDER-BOTTOM: #333 2px solid; POSITION: absolute
+}
+.skip A:active {
+	BORDER-RIGHT: #333 2px solid; BORDER-TOP: #333 2px solid; BACKGROUND: #555; LEFT: 0.5em; BORDER-LEFT: #333 2px solid; COLOR: #fff; BORDER-BOTTOM: #333 2px solid; POSITION: absolute
+}
+.skip A:hover {
+	CURSOR: default
+}

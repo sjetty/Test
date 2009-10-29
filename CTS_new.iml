@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module relativePaths="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="javaeeApplication" name="javaEEApplication">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="application.xml" url="file://$MODULE_DIR$/../common-livelink/conf/j2ee/APP-META-INF/application.xml" optional="false" version="5" />
+        </descriptors>
+        <building>
+          <setting name="EXPLODED_URL" value="file://" />
+          <setting name="EXPLODED_ENABLED" value="false" />
+          <setting name="JAR_URL" value="file://" />
+          <setting name="JAR_ENABLED" value="false" />
+          <setting name="EXCLUDE_EXPLODED_DIRECTORY" value="true" />
+        </building>
+      </configuration>
+    </facet>
+    <facet type="ejb" name="EJB">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="ejb-jar.xml" url="file://$MODULE_DIR$/../common-livelink/conf/j2ee/EJB-META-INF/ejb-jar.xml" optional="false" version="3.0" />
+        </descriptors>
+        <ejbRoots>
+          <root url="file://$MODULE_DIR$/conf/application" />
+          <root url="file://$MODULE_DIR$/conf/hibernate" />
+          <root url="file://$MODULE_DIR$/conf/spring" />
+          <root url="file://$MODULE_DIR$/src" />
+          <root url="file://$MODULE_DIR$/../common-livelink/src" />
+          <root url="file://$MODULE_DIR$/../common-momentum/src" />
+          <root url="file://$MODULE_DIR$/../livelinktools/src" />
+        </ejbRoots>
+        <building>
+          <setting name="EXPLODED_URL" value="file://" />
+          <setting name="EXPLODED_ENABLED" value="false" />
+          <setting name="JAR_URL" value="file://" />
+          <setting name="JAR_ENABLED" value="false" />
+          <setting name="EXCLUDE_EXPLODED_DIRECTORY" value="true" />
+          <setting name="RUN_EJB_VALIDATION" value="true" />
+        </building>
+      </configuration>
+    </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="web: application context" name="MVC application context" removed="false">
+          <file>file://$MODULE_DIR$/conf/spring/application-configuration.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/business.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/content-management.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/message-management.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/profile-management.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/persistence.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/scheduler.xml</file>
+        </fileset>
+        <fileset id="fileset1" name="dmstp1" removed="false">
+          <file>file://$MODULE_DIR$/conf/spring/application-configuration-dmsp01.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/business.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/content-management.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/message-management.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/persistence-dmsp01.xml</file>
+        </fileset>
+        <fileset id="fileset2" name="w3keeocdev1v4" removed="false">
+          <file>file://$MODULE_DIR$/conf/spring/application-configuration-w3keeocdev.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/business.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/content-management.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/message-management.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/persistence-w3keeocdev.xml</file>
+          <file>file://$MODULE_DIR$/conf/spring/profile-management.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+    <facet type="web" name="CTS_new">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="context.xml" url="file://$MODULE_DIR$/../common-livelink/META-INF/context.xml" optional="false" version="5.x" />
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/WEB-INF/web.xml" optional="false" version="2.5" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/WEB-INF" relative="/WEB-INF" />
+          <root url="file://$MODULE_DIR$/conf/application" relative="/WEB-INF/classes" />
+          <root url="file://$MODULE_DIR$/conf/hibernate" relative="/WEB-INF/classes" />
+          <root url="file://$MODULE_DIR$/conf/spring" relative="/WEB-INF/classes" />
+          <root url="file://$MODULE_DIR$/web" relative="/" />
+        </webroots>
+        <building>
+          <setting name="EXPLODED_URL" value="file://$MODULE_DIR$/build/web" />
+          <setting name="EXPLODED_ENABLED" value="true" />
+          <setting name="JAR_URL" value="file://" />
+          <setting name="JAR_ENABLED" value="false" />
+          <setting name="EXCLUDE_EXPLODED_DIRECTORY" value="true" />
+        </building>
+        <packaging>
+          <containerElement type="module" name="CTS_new">
+            <attribute name="method" value="1" />
+            <attribute name="URI" value="/WEB-INF/classes" />
+          </containerElement>
+          <containerElement type="library" level="module">
+            <attribute name="method" value="0" />
+            <attribute name="URI" value="&lt;N/A&gt;" />
+            <url>jar://$MODULE_DIR$/../applibs/java/lib/j2ee.jar!/</url>
+          </containerElement>
+          <containerElement type="library" name="common" level="project">
+            <attribute name="method" value="1" />
+            <attribute name="URI" value="/WEB-INF/lib" />
+          </containerElement>
+          <containerElement type="library" name="jsf" level="project">
+            <attribute name="method" value="1" />
+            <attribute name="URI" value="/WEB-INF/lib" />
+          </containerElement>
+        </packaging>
+      </configuration>
+      <facet type="jsf" name="JSF">
+        <configuration />
+      </facet>
+    </facet>
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="Hibernate" />
+        <setting name="targe-facet" value="CTS_new" />
+        <datasource-mapping>
+          <factory-entry name="CTS_newUnit" />
+        </datasource-mapping>
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/build/web/WEB-INF/classes/META-INF/persistence.xml" optional="false" version="1.0" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/build/web/WEB-INF/classes" />
+    <output-test url="file://$MODULE_DIR$/build/web/WEB-INF/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/WEB-INF" />
+    <content url="file://$MODULE_DIR$/conf">
+      <sourceFolder url="file://$MODULE_DIR$/conf/application" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/conf/hibernate" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/conf/spring" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/src">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/web">
+      <sourceFolder url="file://$MODULE_DIR$/web" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../common-livelink">
+      <sourceFolder url="file://$MODULE_DIR$/../common-livelink/src" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../common-momentum">
+      <sourceFolder url="file://$MODULE_DIR$/../common-momentum/src" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../livelinktools">
+      <sourceFolder url="file://$MODULE_DIR$/../livelinktools/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="common" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../applibs/java/lib/j2ee.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="jsf" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$APPLICATION_HOME_DIR$/lib/javaee.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>
+

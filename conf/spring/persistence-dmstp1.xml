@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+    <!-- Transaction interceptor for a single Hibernate SessionFactory (alternative to JTA) -->
+    <!-- set default transaction attributes -->
+    <bean id="businessObjectTxAttributes"
+          class="org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource">
+        <property name="properties">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="edit*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="create*">PROPAGATION_REQUIRED</prop>
+                <prop key="cancel*">PROPAGATION_REQUIRED</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="process*">PROPAGATION_REQUIRED</prop>
+                <prop key="search*">PROPAGATION_REQUIRED</prop>
+                <prop key="initate*">PROPAGATION_REQUIRED</prop>
+                <prop key="add*">PROPAGATION_REQUIRED</prop>
+                <prop key="do*">PROPAGATION_REQUIRES_NEW</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <!-- ========================= Start of Livelink PERSISTENCE DEFINITIONS ========================= -->
+
+    <bean id="livelinkDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" >
+        <property name="driverClass">
+            <value>oracle.jdbc.driver.OracleDriver</value>
+        </property>
+        <property name="jdbcUrl">
+            <value>jdbc:oracle:thin:@201.1.24.136:1525:TEST</value>
+        </property>
+        <property name="user" value="CTSLIVELINK"/>
+        <property name="password" value="CTSLIVELINK"/>
+
+        <!-- c3p0 http://www.mchange.com/projects/c3p0/index.html -->
+        <property name="acquireIncrement" value="5"/>
+        <property name="initialPoolSize" value="5"/>
+        <property name="minPoolSize" value="5"/>
+        <property name="maxPoolSize" value="100"/>
+        <property name="maxStatements" value="0"/>
+
+        <!-- seconds (1800=30 mins) -->
+        <property name="idleConnectionTestPeriod" value="1800"/>
+        <property name="testConnectionOnCheckin" value="true"/>
+    </bean>
+
+    <!-- Choose the dialect that matches your "dataSource" definition -->
+    <bean id="livelinkSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="mappingResources">
+            <list>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+        <property name="dataSource">
+            <ref bean="livelinkDataSource"/>
+        </property>
+    </bean>
+
+    <bean id="livelinkTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory">
+            <ref local="livelinkSessionFactory"/>
+        </property>
+    </bean>
+
+    <bean id="livelinkTransactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+        <property name="transactionManager">
+            <ref local="livelinkTransactionManager"/>
+        </property>
+        <property name="transactionAttributeSource">
+            <ref local="livelinkTxAttributes"/>
+        </property>
+    </bean>
+
+
+    <bean id="livelinkTxAttributes" class="org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource">
+        <property name="properties">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <bean id="livelinkJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource">
+            <ref local="livelinkDataSource"/>
+        </property>
+    </bean>
+
+<!-- todo: only use the LivelinkDao if we need to directly touch the livelink tables     
+    <bean id="livelinkDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+         <property name="target">
+             <ref local="livelinkDaoTarget"/>
+         </property>
+         <property name="proxyInterfaces">
+             <value>com.momentumsystems.fxcm.persistence.dao.LivelinkDao</value>
+         </property>
+         <property name="interceptorNames">
+             <list>
+                 <value>livelinkTransactionInterceptor</value>
+             </list>
+         </property>
+     </bean>
+     <bean id="livelinkDaoTarget"
+           class="com.momentumsystems.fxcm.persistence.dao.hibernate.LivelinkDaoImpl">
+         <property name="sessionFactory">
+             <ref local="livelinkSessionFactory"/>
+         </property>
+         <property name="systemInfo">
+             <ref bean="systemConfiguration"/>
+         </property>
+         <property name="livelinkJdbcTemplate">
+             <ref local="livelinkJdbcTemplate"/>
+         </property>
+     </bean>
+-->
+
+
+    <bean id="livelinkBoTransactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+        <property name="transactionManager">
+            <ref local="livelinkTransactionManager"/>
+        </property>
+        <property name="transactionAttributeSource">
+            <ref local="businessObjectTxAttributes"/>
+        </property>
+    </bean>
+
+
+    <!-- ========================= Start of project PERSISTENCE DEFINITIONS ========================= -->
+
+    <bean id="projectDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" >
+        <property name="driverClass">
+            <value>oracle.jdbc.driver.OracleDriver</value>
+        </property>
+        <property name="jdbcUrl">
+            <value>jdbc:oracle:thin:@201.1.24.136:1525:TEST</value>
+        </property>
+        <property name="user" value="cts_o"/>
+        <property name="password" value="ctsoeeoc"/>
+
+        <!-- c3p0 http://www.mchange.com/projects/c3p0/index.html -->
+        <property name="acquireIncrement" value="5"/>
+        <property name="initialPoolSize" value="5"/>
+        <property name="minPoolSize" value="5"/>
+        <property name="maxPoolSize" value="100"/>
+        <property name="maxStatements" value="0"/>
+
+        <!-- seconds (1800=30 mins) -->
+        <property name="idleConnectionTestPeriod" value="1800"/>
+        <property name="testConnectionOnCheckin" value="true"/>
+    </bean>
+
+    <!-- Choose the dialect that matches your "dataSource" definition -->
+    <bean id="projectSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="annotatedClasses">
+            <list>
+                <value>com.momentumsystems.eeoc.cts.domain.DailyNewsClips</value>
+                <value>com.momentumsystems.eeoc.cts.domain.SubmittalTypeLv</value>
+            </list>
+        </property>
+        <property  name="configurationClass">
+            <value>org.hibernate.cfg.AnnotationConfiguration</value>
+        </property>
+
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+        <property name="dataSource">
+            <ref bean="projectDataSource"/>
+        </property>
+    </bean>
+
+    <bean id="hibernateSessionInterceptor"
+          class="com.momentumsystems.persistence.hibernate3.Hibernate3SessionInterceptor">
+        <property name="sessionFactory">
+            <ref local="projectSessionFactory"/>
+        </property>
+    </bean>
+
+    <bean id="projectTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory">
+            <ref local="projectSessionFactory"/>
+        </property>
+    </bean>
+
+    <bean id="projectTransactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+        <property name="transactionManager">
+            <ref local="projectTransactionManager"/>
+        </property>
+        <property name="transactionAttributeSource">
+            <ref local="projectTxAttributes"/>
+        </property>
+    </bean>
+
+
+    <bean id="projectTxAttributes" class="org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource">
+        <property name="properties">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <bean id="projectJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource">
+            <ref local="projectDataSource"/>
+        </property>
+    </bean>
+
+    <bean id="projectBoTransactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+        <property name="transactionManager">
+            <ref local="projectTransactionManager"/>
+        </property>
+        <property name="transactionAttributeSource">
+            <ref local="businessObjectTxAttributes"/>
+        </property>
+    </bean>
+
+
+    <!-- ************************************************************ -->
+    <!-- **********   Project Table DAOs -->
+    <!-- ************************************************************ -->
+
+    <bean id="baseProjectDao" abstract="true" class="com.momentumsystems.eeoc.cts.persistence.hibernate.NvsBaseDaoImpl">
+        <property name="sessionFactory">
+            <ref local="projectSessionFactory"/>
+        </property>
+        <property name="systemInfo">
+            <ref bean="systemConfiguration"/>
+        </property>
+    </bean>
+
+    <bean id="dailyNewsClipsDao" class="com.momentumsystems.eeoc.cts.persistence.hibernate.DailyNewsClipsDaoImpl" parent="baseProjectDao" />
+</beans>

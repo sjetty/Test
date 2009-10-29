@@ -1,0 +1,46 @@
+<public:component lightWeight="true">
+<public:attach event="onpropertychange" onevent="propertyChanged()" />
+<script>
+	
+	/*
+	 * 	This script tricks IE into displaying a transparent GIF with a properly 
+	 *	shaded PNG image underneath it. Workaround for IE's inability to display PNGs correctly.
+	 *
+	 */
+	 
+	if ( element.document.media != "print" )
+	{
+		var imageTemp;
+		var mask = "spacer.gif";
+		var supported = ( IE && !isMac && !IE4 && !IE50  );
+	
+		if ( supported )
+		{
+			var pngImage = element.src;
+			mask = element.src.substring( 0, element.src.lastIndexOf( "\/" ) + 1 ) + mask;
+			
+			if ( pngImage == imageTemp && /\.png$/i.test(pngImage)) 
+			{ 
+				element.src = mask;
+				exit;
+			} 
+			
+			if ( ! new RegExp(mask).test(pngImage)) 
+			{ 
+				imageTemp = pngImage; 
+			} 
+			
+			if (/\.png$/i.test(imageTemp))
+			{ 
+				element.src = mask;
+				element.runtimeStyle.filter = "progid:DXImageTransform.Microsoft." + "AlphaImageLoader(src='" + pngImage + "',sizingMethod='scale')";
+			} 
+			else 
+			{ 
+				element.runtimeStyle.filter="";
+			}
+		}
+	}
+	
+</script>
+</public:component>

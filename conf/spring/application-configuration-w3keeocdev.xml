@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <!--   This allows us to have the application.properties file in the classpath and overload those server specific properties -->
+    <bean id="placeHolderConfig" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer" abstract="false" singleton="true" lazy-init="default" autowire="default" dependency-check="default">
+        <property name="location">
+            <value>classpath:application.properties</value>
+        </property>
+        <property name="ignoreResourceNotFound" value="true" />
+    </bean>
+
+    <bean id="systemConfiguration" class="com.momentumsystems.eeoc.cts.util.system.CtsSystemInfoImpl" abstract="false" singleton="true" lazy-init="default" autowire="default" dependency-check="default">
+        <property name="dateTimeFormatString" value="MM/dd/yyyy h:mm a"/>
+        <property name="dateFormatString" value="MM/dd/yyyy" />
+        <property name="dncFolderId" value="132731" />
+        <property name="dncHoldingBinId" value="132791" />
+        <property name="dncWorkflowId" value="133031" />
+
+        <property name="maxResults" value="750"/>
+
+        <property name="hibernateResourceBundle">
+            <value>hibernate</value>
+        </property>
+        <property name="contentManagementUser">
+			<value>Admin</value>
+		</property>
+        <property name="workflowManagementUser">
+			<value>NVS Automation</value>
+		</property>
+        <property name="contactEmail">
+			<value>xlu@momentumsystems.com</value>
+		</property>
+        <property name="appBaseUrl">
+			<value>http://mosys34.momentumsystems.com:8280/</value>
+		</property>
+        <property name="baseUrl">
+			<value>http://w3keeocdev1v4.ad.mosys/livelink/livelink.exe</value>
+		</property>
+        <property name="logoutUrl">
+			<value>?func=mssinglelogon.SingleLogout</value>
+		</property>
+		<property name="fetchUrl">
+            <value>?func=doc.Fetch&amp;nodeid=</value>
+        </property>
+        <property name="browseUrl">
+			<value>?func=ll&amp;objAction=browse&amp;objId=</value>
+		</property>
+        <property name="helpUrl">
+			<value>?func=ll&amp;objAction=download&amp;objId=12245</value>
+		</property>
+        <property name="serverUrl">
+			<value>http://w3keeocdev1v4.ad.mosys/</value>
+		</property>
+        <property name="livelinkObjectIdMacro">
+            <value>::objectId::</value>
+        </property>
+        <property name="domainObjectPath" value="com.momentumsystems.eeoc.cts.domain."/>
+
+        <property name="dncUser">
+            <value>Admin</value>
+        </property>
+    </bean>
+</beans>

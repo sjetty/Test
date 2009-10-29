@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+
+<project name="CTS_new" default="dev" basedir=".">
+
+    <!-- The directory containing compiled classes -->
+    <property name="build.dir" value="build"/>
+    <property name="build.classes.dir" value="${build.dir}/classes"/>
+    <property name="build.hibernate.dir" value="${build.classes.dir}/hibernate"/>
+
+	<!-- The directory containing output -->
+    <property name="output.dir" value="build"/>
+    <property name="output.root.dir" value="${output.dir}/cts_new"/>
+    <property name="output.web.dir" value="${output.root.dir}"/>
+    <property name="output.webinf.dir" value="${output.root.dir}/WEB-INF"/>
+    <property name="output.webinf.classes.dir" value="${output.webinf.dir}/classes"/>
+    <property name="output.lib.dir" value="${output.webinf.dir}/lib"/>
+    <property name="output.message.dir" value="${output.webinf.classes.dir}/com/momentumsystems/eeoc/cts"/>
+
+	<!-- The directory containing source code -->
+	<property name="src.dir" value="src"/>
+    <property name="web.dir" value="web"/>
+    <property name="webinf.dir" value="WEB-INF"/>
+    <property name="lib.dir" value="lib"/>
+	<property name="conf.dir" value="conf"/>
+	<property name="conf_application.dir" value="${conf.dir}/application"/>
+    <property name="conf_hibernate.dir" value="${conf.dir}/hibernate"/>
+    <property name="conf_spring.dir" value="${conf.dir}/spring"/>
+    <property name="message.dir" value="${src.dir}/com/momentumsystems/eeoc/cts"/>
+
+    <!-- Java compiler options -->
+	<property name="debug.flag" value="on"/>
+	<property name="deprecation.flag" value="on"/>
+
+	<target name="build" description="Compiles all source code.">
+        <echo message="Create development build directories..."/>
+        <!--<mkdir dir="${build.dir}" />
+        <mkdir dir="${build.classes.dir}" />-->
+        <path id="compile.classpath">
+			<fileset dir="${lib.dir}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</path>
+        <echo message="Copying src from - ${src.dir} ..."/>
+		<javac destdir="${build.classes.dir}"
+			debug="${debug.flag}"
+			deprecation="${deprecation.flag}">
+			<src path="${src.dir}"/>
+			<classpath refid="compile.classpath"/>
+		</javac>
+        <echo message="Done ..."/>
+		<tstamp/>
+	</target>
+
+    <target name="build-common" description="Compiles all source code.">
+        <echo message="Create development build directories..."/>
+        <mkdir dir="${build.dir}" />
+        <mkdir dir="${build.classes.dir}" />
+        <path id="compile.classpath">
+			<fileset dir="${lib.dir}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</path>
+        <echo message="Copying src from - ../common-momentum/src ..."/>
+		<javac destdir="${build.classes.dir}"
+			debug="${debug.flag}"
+			deprecation="${deprecation.flag}">
+			<src path="../common-momentum/src"/>
+			<classpath refid="compile.classpath"/>
+		</javac>
+        <echo message="Copying src from - ../common-livelink/src ..."/>
+        <javac destdir="${build.classes.dir}"
+			debug="${debug.flag}"
+			deprecation="${deprecation.flag}">
+			<src path="../common-livelink/src"/>
+			<classpath refid="compile.classpath"/>
+		</javac>
+        <echo message="Copying src from - ../livelinktools/src ..."/>
+        <javac destdir="${build.classes.dir}"
+			debug="${debug.flag}"
+			deprecation="${deprecation.flag}">
+			<src path="../livelinktools/src"/>
+			<classpath refid="compile.classpath"/>
+		</javac>
+        <echo message="Done ..."/>
+		<tstamp/>
+	</target>
+
+	<target name="dev" depends="clean,build-common,build" description="Deploys development app in ${output.dir}">
+		<echo message="Create development deployment directories..."/>
+        <mkdir dir="${output.dir}" />
+        <mkdir dir="${output.web.dir}" />
+        <mkdir dir="${output.webinf.dir}" />
+        <mkdir dir="${output.webinf.classes.dir}" />
+
+        <!-- web files -->
+        <echo message="Copying web files to deployment directory - ${output.web.dir} ..."/>
+		<copy todir="${output.web.dir}">
+			<fileset dir="${web.dir}"/>
+		</copy>
+
+        <!-- class files -->
+		<echo message="Copying class files..."/>
+		<copy todir="${output.webinf.classes.dir}">
+			<fileset dir="${build.classes.dir}" excludes="**/ejb/*,**/ejb"/>
+		</copy>
+
+        <!-- application config files -->
+		<echo message="Copying all logging config from ${conf_application.dir} to ${output.webinf.classes.dir}"/>
+		<copy todir="${output.webinf.classes.dir}">
+            <fileset dir="${conf_application.dir}"/>
+		</copy>
+
+        <!-- hibernate config files -->
+		<echo message="Copying all logging config from ${conf_hibernate.dir} to ${output.webinf.classes.dir}"/>
+		<copy todir="${output.webinf.classes.dir}">
+            <fileset dir="${conf_hibernate.dir}"/>
+		</copy>
+
+        <!-- spring config files -->
+		<echo message="Copying all Spring config files from ${conf_spring.dir} to  ${output.webinf.classes.dir}..."/>
+		<copy todir="${output.webinf.classes.dir}">
+			<fileset dir="${conf_spring.dir}" includes="**/*.xml"/>
+			<fileset dir="${conf_spring.dir}" includes="**/*.properties"/>
+		</copy>
+
+		<!-- lib files -->
+		<echo message="Copying all config files from ${lib.dir} to  ${output.lib.dir}..."/>
+		<copy todir="${output.lib.dir}">
+			<fileset dir="${lib.dir}" excludes="${lib.dir}/xdoclet" includes="*.jar" />
+		</copy>
+
+        <!-- meta-inf files -->
+		<echo message="Copying web-inf files"/>
+		<copy todir="${output.webinf.dir}">
+		    <fileset dir="${webinf.dir}" />
+		</copy>
+
+        <!-- message property file -->
+        <echo message="Copying messages.properties files"/>
+		<copy todir="${output.message.dir}">
+		    <fileset dir="${message.dir}" includes="messages.properties" />
+		</copy>
+
+        <!-- clean build directory -->
+        <delete dir="${build.dir}"/>
+
+	</target>
+
+    <target name="clean" description="Remove all development generated files.">
+		<echo message="Clean all dependent modules ..."/>
+        <delete dir="${build.dir}"/>
+        <delete dir="${output.dir}"/>
+	</target>
+
+    <target name="copy_src" depends="clean_output_src" description="Deploys development app.">
+
+        <!-- The directory to output source code -->
+        <property name="output_src.root.dir" value="output_src"/>
+        <property name="output_src.src.dir" value="${output_src.root.dir}/src"/>
+        <property name="output_src.web.dir" value="${output_src.root.dir}/web"/>
+        <property name="output_src.lib.dir" value="${output_src.root.dir}/lib"/>
+        <property name="output_src.conf.dir" value="${output_src.root.dir}/conf"/>
+
+        <echo message="Create output source directories..."/>
+        <mkdir dir="${output_src.root.dir}" />
+        <mkdir dir="${output_src.src.dir}" />
+        <mkdir dir="${output_src.web.dir}" />
+        <mkdir dir="${output_src.lib.dir}" />
+        <mkdir dir="${output_src.conf.dir}" />
+
+        <echo message="Copying src files to directory - ${output_src.src.dir} ..."/>
+		<copy todir="${output_src.src.dir}">
+			<fileset dir="${src.dir}"/>
+		</copy>
+
+        <echo message="Copying web files to directory - ${output_src.web.dir} ..."/>
+		<copy todir="${output_src.web.dir}">
+			<fileset dir="${web.dir}"/>
+		</copy>
+
+        <echo message="Copying lib files to directory - ${output_src.lib.dir} ..."/>
+		<copy todir="${output_src.lib.dir}">
+			<fileset dir="${lib.dir}"/>
+		</copy>
+
+        <echo message="Copying conf application files to directory - ${output_src.conf.dir} ..."/>
+		<copy todir="${output_src.conf.dir}">
+			<fileset dir="${conf.dir}"/>
+		</copy>
+
+	</target>
+
+    <target name="clean_output_src" description="Remove all output src files.">
+		<echo message="Remove all output src files..."/>
+        <delete dir="output_src"/>
+	</target>
+
+</project>

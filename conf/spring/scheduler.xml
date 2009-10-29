@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+    <!--<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+        <!--<property name="triggers">-->
+            <!--<list>-->
+                <!--<ref bean="automationTrigger" />-->
+                <!--<ref bean="pusherTrigger" />-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="automationTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">-->
+        <!--<property name="jobDetail" ref="workflowAutomation" />-->
+        <!-- run every 4 minutes at 15 seconds after the minute from 7am to 8pm Mon-Fri -->
+        <!--<property name="cronExpression" value="15 0/4 7-21 ? * MON,TUE,WED,THUR,FRI" />-->
+    <!--</bean>-->
+
+    <!--<bean id="pusherTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">-->
+        <!--<property name="jobDetail" ref="workflowPusher" />-->
+        <!-- run every night at 2 seconds after the minute at 9:05pm Mon-Fri -->
+        <!--<property name="cronExpression" value="2 10 14 ? * MON,TUE,WED,THUR,FRI" />-->
+    <!--</bean>-->
+
+    <!--<bean id="workflowAutomation" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+          <!--<property name="targetObject" ref="workflowBusinessObject" />-->
+          <!--<property name="targetMethod" value="processWorkflowAutomation" />-->
+          <!--<property name="concurrent" value="false" />-->
+    <!--</bean>-->
+
+    <!--<bean id="workflowPusher" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+          <!--<property name="targetObject" ref="workflowBusinessObject" />-->
+          <!--<property name="targetMethod" value="processWorkflowPusher" />-->
+          <!--<property name="concurrent" value="false" />-->
+    <!--</bean>-->
+</beans>

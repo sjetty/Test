@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<configuration xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation = "configuration.xsd">
+  <name>Mailer</name>
+      <attribute>
+          <name>mail.smtp.host</name>
+          <type>java.lang.String</type>
+          <value>w8kexchange.momentumsystems.com</value>
+      </attribute>
+      <attribute>
+          <name>mail.from</name>
+          <type>java.lang.String</type>
+          <value>xlu@MomentumSystems.com</value>
+      </attribute>
+      <attribute>
+          <name>mail.replyto</name>
+          <type>java.lang.String</type>
+          <value>xlu@MomentumSystems.com</value>
+      </attribute>
+       <attribute>
+          <name>mail.test.to</name>
+          <type>java.lang.String</type>
+          <value>xlu@MomentumSystems.com</value>
+      </attribute>
+      <attribute>
+          <name>mail.test.activate</name>
+          <type>java.lang.Boolean</type>
+          <value>TRUE</value>
+      </attribute>
+</configuration>

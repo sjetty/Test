@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="ctsDocumentManagement"
+              class="com.momentumsystems.eeoc.cts.contentmanagement.CtsLivelinkDocumentManagementImpl">
+            <property name="folderTool">
+                <ref local="livelinkFolderTool"/>
+            </property>
+            <property name="nodeTool">
+                <ref local="livelinkNodeTool"/>
+            </property>
+            <property name="systemInfo">
+                <ref bean="systemConfiguration"/>
+            </property>
+            <property name="sessionTool">
+                <ref local="livelinkSessionTool"/>
+            </property>
+    </bean>
+
+    <bean id="livelinkFolderTool" class="com.momentumsystems.livelink.server.FolderTool"></bean>
+
+    <bean id="livelinkNodeTool" class="com.momentumsystems.livelink.server.NodeToolServer"></bean>
+
+    <bean id="livelinkSessionTool" class="com.momentumsystems.livelink.server.SessionTool"></bean>
+
+    <bean id="livelinkWorkflowTool" class="com.momentumsystems.livelink.server.WorkflowTool"></bean>
+
+	<bean id="livelinkUser" class="com.momentumsystems.livelink.User"></bean>
+
+    <bean id="baseContentManagmentTemplate" class="com.momentumsystems.livelinktools.folder.BaseFolderLivelinkImpl" abstract="true">
+        <property name="systemInfo">
+            <ref bean="systemConfiguration"/>
+        </property>
+        <!--
+        <property name="messageManagement">
+            <ref bean="messageManagement"/>
+        </property>
+        -->
+    </bean>
+
+
+    <bean id="contentManagementProxyTemplate2" class="org.springframework.aop.framework.ProxyFactoryBean" abstract="true">
+        <property name="proxyInterfaces">
+            <list>
+                <value>com.momentumsystems.contentmanagement.Folder</value>
+                <value>com.momentumsystems.contentmanagement.Node</value>
+                <value>com.momentumsystems.contentmanagement.Workflow</value>
+                <value>com.momentumsystems.contentmanagement.Task</value>
+                <value>com.momentumsystems.contentmanagement.IdentityAdmin</value>
+                <value>com.momentumsystems.contentmanagement.UserAdmin</value>
+                <value>com.momentumsystems.contentmanagement.GroupAdmin</value>
+            </list>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>profileInterceptor</value>
+                <value>retryContentManagmentAdvisor</value>
+                <value>errorAdvisor</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--####################################################################-->
+    <!--                             Folder beans                           -->
+    <!--####################################################################-->
+
+    <bean id="listDocuments" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref bean="listDocumentsTarget"/>
+        </property>
+    </bean>
+
+    <bean id="listDocumentsTarget" class="com.momentumsystems.livelinktools.folder.ListDocumentsFolderLivelinkImpl" parent="baseContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="get">
+            <ref bean="getNodeTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="getSubfolder" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getSubfolderTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getSubfolderTarget" class="com.momentumsystems.livelinktools.folder.GetSubFolderLivelinkImpl" parent="baseContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="get">
+            <ref bean="getNodeTarget"/>
+        </property>
+    </bean>
+
+    <bean id="addOrUpdateDocument" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="addOrUpdateDocumentTarget"/>
+        </property>
+    </bean>
+
+    <bean id="addOrUpdateDocumentTarget" class="com.momentumsystems.livelinktools.folder.AddOrUpdateDocumentFolderLivelinkImpl" parent="baseContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="get">
+            <ref bean="getNodeTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="addDocument" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="addDocumentTarget"/>
+        </property>
+    </bean>
+
+    <bean id="addDocumentTarget" class="com.momentumsystems.livelinktools.folder.AddDocumentFolderLivelinkImpl" parent="baseContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+
+
+    <bean id="folderTool" class="com.momentumsystems.contentmanagement.FolderTool">
+        <property name="messageManagement">
+            <ref bean="messageManagement"/>
+        </property>
+        <property name="systemInfo">
+            <ref bean="systemConfiguration"/>
+        </property>
+        <property name="getSubfolder">
+            <ref bean="getSubfolder"/>
+        </property>
+        <property name="addOrUpdate">
+            <ref bean="addOrUpdateDocument"/>
+        </property>
+        <property name="addDocument">
+            <ref bean="addDocument"/>
+        </property>
+        <property name="listDocuments">
+            <ref bean="listDocuments"/>
+        </property>
+    </bean>
+
+
+    <!--####################################################################-->
+    <!--                             Identity beans                         -->
+    <!--####################################################################-->
+
+
+    <bean id="getUser" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getUserTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getUserTarget" class="com.momentumsystems.livelinktools.useradmin.GetUserAdminLivelinkImpl" parent="baseContentManagmentTemplate"/>
+
+
+    <bean id="getIdentity" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getIdentityTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getIdentityTarget" class="com.momentumsystems.livelinktools.identityadmin.GetIdentityAdminLivelinkImpl" parent="baseContentManagmentTemplate"/>
+
+
+    <bean id="userTool" class="com.momentumsystems.contentmanagement.UserTool">
+        <property name="messageManagement">
+            <ref bean="messageManagement"/>
+        </property>
+        <property name="systemInfo">
+            <ref bean="systemConfiguration"/>
+        </property>
+        <property name="get">
+            <ref bean="getUser"/>
+        </property>
+    </bean>
+
+
+    <bean id="getGroup" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getGroupTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getGroupTarget" class="com.momentumsystems.livelinktools.groupadmin.GetGroupAdminLivelinkImpl" parent="baseContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="groupTool" class="com.momentumsystems.contentmanagement.GroupTool">
+        <property name="messageManagement">
+            <ref bean="messageManagement"/>
+        </property>
+        <property name="systemInfo">
+            <ref bean="systemConfiguration"/>
+        </property>
+        <property name="get">
+            <ref bean="getGroup"/>
+        </property>
+    </bean>
+
+
+    <bean id="identityTool" class="com.momentumsystems.contentmanagement.IdentityTool">
+        <property name="messageManagement">
+            <ref bean="messageManagement"/>
+        </property>
+        <property name="systemInfo">
+            <ref bean="systemConfiguration"/>
+        </property>
+        <property name="get">
+            <ref local="getIdentity"/>
+        </property>
+    </bean>
+
+
+    <!--########################################################################-->
+    <!--                                 Node                                  -->
+    <!--#########################################################################-->
+
+    <bean id="baseNodeContentManagmentTemplate" class="com.momentumsystems.livelinktools.node.BaseNodeLivelinkImpl" abstract="true">
+        <property name="systemInfo">
+            <ref bean="systemConfiguration"/>
+        </property>
+        <property name="messageManagement">
+            <ref bean="messageManagement"/>
+        </property>
+    </bean>
+
+    <bean id="moveNode" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="moveNodeTarget"/>
+        </property>
+    </bean>
+
+    <bean id="moveNodeTarget" class="com.momentumsystems.livelinktools.node.MoveNodeLivelinkImpl" parent="baseNodeContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="get">
+            <ref bean="getNodeTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="updateNode" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="updateNodeTarget"/>
+        </property>
+    </bean>
+
+    <bean id="updateNodeTarget" class="com.momentumsystems.livelinktools.node.UpdateNodeLivelinkImpl" parent="baseNodeContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="folder">
+            <ref bean="getNodeTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="getNode" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getNodeTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getNodeTarget" class="com.momentumsystems.livelinktools.node.GetNodeLivelinkImpl" parent="baseNodeContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="deleteNode" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="deleteNodeTarget"/>
+        </property>
+    </bean>
+
+    <bean id="deleteNodeTarget" class="com.momentumsystems.livelinktools.node.DeleteNodeLivelinkImpl" parent="baseNodeContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="fetchNode" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="fetchNodeTarget"/>
+        </property>
+    </bean>
+
+    <bean id="fetchNodeTarget" class="com.momentumsystems.livelinktools.node.FetchNodeLivelinkImpl" parent="baseNodeContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="get">
+            <ref bean="getNodeTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="copyNode" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="copyNodeTarget"/>
+        </property>
+    </bean>
+
+    <bean id="copyNodeTarget" class="com.momentumsystems.livelinktools.node.CopyNodeLivelinkImpl" parent="baseNodeContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="get">
+            <ref bean="getNodeTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="createNode" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="createNodeTarget"/>
+        </property>
+    </bean>
+
+    <bean id="createNodeTarget" class="com.momentumsystems.livelinktools.node.CreateNodeLivelinkImpl" parent="baseNodeContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="get">
+            <ref bean="getNodeTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="getEnterpriseWS" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getEnterpriseWSTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getEnterpriseWSTarget" class="com.momentumsystems.livelinktools.node.GetEnterpriseWorkSpaceLivelinkImpl" parent="baseNodeContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="get">
+            <ref bean="getNodeTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getPersonalWS" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getPersonalWSTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getPersonalWSTarget" class="com.momentumsystems.livelinktools.node.GetPersonalWorkSpaceLivelinkImpl" parent="baseNodeContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="get">
+            <ref bean="getNodeTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="getEnterpriseWSId" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getEnterpriseWSIdTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getEnterpriseWSIdTarget" class="com.momentumsystems.livelinktools.node.GetEnterpriseWorkSpaceIdLivelinkImpl" parent="baseNodeContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getNodeCatAttrValues" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getNodeCatAttrValuesTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getNodeCatAttrValuesTarget" class="com.momentumsystems.livelinktools.node.GetNodeCategoryAttributeValuesLivelinkImpl"
+          parent="baseNodeContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="nodeTool" class="com.momentumsystems.contentmanagement.NodeTool">
+        <property name="messageManagement">
+            <ref bean="messageManagement"/>
+        </property>
+        <property name="systemInfo">
+            <ref bean="systemConfiguration"/>
+        </property>
+        <property name="delete">
+            <ref bean="deleteNode"/>
+        </property>
+        <property name="update">
+            <ref bean="updateNode"/>
+        </property>
+        <property name="create">
+            <ref bean="createNode"/>
+        </property>
+        <property name="get">
+            <ref bean="getNode"/>
+        </property>
+        <property name="copy">
+            <ref bean="copyNode"/>
+        </property>
+        <property name="move">
+            <ref bean="moveNode"/>
+        </property>
+        <property name="fetch">
+            <ref bean="fetchNode"/>
+        </property>
+        <property name="getEnterpriseWS">
+            <ref bean="getEnterpriseWS"/>
+        </property>
+        <property name="getEnterpriseWSId">
+            <ref bean="getEnterpriseWSId"/>
+        </property>
+        <property name="getPersonalWS">
+            <ref bean="getPersonalWS"/>
+        </property>
+        <property name="getCatAttrValues">
+            <ref bean="getNodeCatAttrValues"/>
+        </property>
+
+    </bean>
+
+
+    <!--####################################################################################-->
+    <!--                                      Workflow                                      -->
+    <!--####################################################################################-->
+
+    <bean id="baseWorkflowContentManagmentTemplate" class="com.momentumsystems.livelinktools.workflow.BaseWorkflowLivelinkImpl" abstract="true">
+        <property name="systemInfo">
+            <ref bean="systemConfiguration"/>
+        </property>
+        <property name="messageManagement">
+            <ref bean="messageManagement"/>
+        </property>
+    </bean>
+
+
+    <bean id="createWorkflow" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="createWorkflowTarget"/>
+        </property>
+    </bean>
+
+    <bean id="createWorkflowTarget" class="com.momentumsystems.livelinktools.workflow.CreateWorkflowLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="get">
+            <ref bean="getWorkflow"/>
+        </property>
+    </bean>
+
+
+    <bean id="setAttributes" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="setAttributesTarget"/>
+        </property>
+    </bean>
+
+    <bean id="setAttributesTarget" class="com.momentumsystems.livelinktools.workflow.SetAttributesWorkflowLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="get">
+            <ref bean="getWorkflow"/>
+        </property>
+    </bean>
+
+
+    <bean id="getAllStepInformation" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getAllStepInformationTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getAllStepInformationTarget" class="com.momentumsystems.livelinktools.workflow.GetAllTaskInformationWorkflowLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="get">
+            <ref bean="getWorkflow"/>
+        </property>
+    </bean>
+
+
+    <bean id="getActiveStepInformation" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getActiveStepInformationTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getActiveStepInformationTarget" class="com.momentumsystems.livelinktools.workflow.GetActiveTaskWorkflowLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="get">
+            <ref bean="getWorkflow"/>
+        </property>
+    </bean>
+
+
+    <bean id="getSubWorkflows" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getSubWorkflowsTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getSubWorkflowsTarget" class="com.momentumsystems.livelinktools.workflow.GetSubWorkflowsWorkflowLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="getWorkflow" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getWorkflowTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getWorkflowTarget" class="com.momentumsystems.livelinktools.workflow.GetWorkflowLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="stopWorkflow" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="stopWorkflowTarget"/>
+        </property>
+    </bean>
+
+    <bean id="stopWorkflowTarget" class="com.momentumsystems.livelinktools.workflow.StopWorkflowLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="suspendeWorkflow" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="suspendeWorkflowTarget"/>
+        </property>
+    </bean>
+
+    <bean id="suspendeWorkflowTarget" class="com.momentumsystems.livelinktools.workflow.SuspendWorkflowLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="terminateWorkflow" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="terminateWorkflowTarget"/>
+        </property>
+    </bean>
+
+    <bean id="terminateWorkflowTarget" class="com.momentumsystems.livelinktools.workflow.TerminateWorkflowLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="archiveWorkflow" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="archiveWorkflowTarget"/>
+        </property>
+    </bean>
+
+    <bean id="archiveWorkflowTarget" class="com.momentumsystems.livelinktools.workflow.ArchiveWorkflowLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="resumeWorkflow" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="resumeWorkflowTarget"/>
+        </property>
+    </bean>
+
+    <bean id="resumeWorkflowTarget" class="com.momentumsystems.livelinktools.workflow.ResumeWorkflowLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+
+    <bean id="getAttributes" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getAttributesTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getAttributesTarget" class="com.momentumsystems.livelinktools.workflow.GetAttributesWorkflowLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getAttachmentsFolder" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getAttachmentsFolderTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getAttachmentsFolderTarget" class="com.momentumsystems.livelinktools.workflow.GetAttachmentsFolderWorkflowLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getWorkflowCatAttrValues" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getWorkflowCatAttrValuesTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getWorkflowCatAttrValuesTarget" class="com.momentumsystems.livelinktools.workflow.GetWorkflowCategoryAttributeValuesLivelinkImpl"
+          parent="baseNodeContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+    </bean>
+
+    <bean id="workflowTool" class="com.momentumsystems.contentmanagement.WorkflowTool">
+        <property name="messageManagement">
+            <ref bean="messageManagement"/>
+        </property>
+        <property name="systemInfo">
+            <ref bean="systemConfiguration"/>
+        </property>
+        <property name="create">
+            <ref bean="createWorkflow"/>
+        </property>
+        <property name="getAllStepInformation">
+            <ref bean="getAllStepInformation"/>
+        </property>
+        <property name="getActiveStepInformation">
+            <ref bean="getActiveStepInformation"/>
+        </property>
+        <property name="getSubWorkflows">
+            <ref bean="getSubWorkflows"/>
+        </property>
+        <property name="get">
+            <ref bean="getWorkflow"/>
+        </property>
+        <property name="stop">
+            <ref bean="stopWorkflow"/>
+        </property>
+        <property name="suspend">
+            <ref bean="suspendeWorkflow"/>
+        </property>
+        <property name="terminate">
+            <ref bean="terminateWorkflow"/>
+        </property>
+        <property name="archive">
+            <ref bean="archiveWorkflow"/>
+        </property>
+        <property name="resume">
+            <ref bean="resumeWorkflow"/>
+        </property>
+        <property name="getAttributes">
+            <ref bean="getAttributes"/>
+        </property>
+        <property name="setAttributes">
+            <ref bean="setAttributes"/>
+        </property>
+        <property name="getAttachmentsFolder">
+            <ref bean="getAttachmentsFolder"/>
+        </property>
+        <property name="getCatAttrValues">
+            <ref bean="getWorkflowCatAttrValues"/>
+        </property>
+    </bean>
+
+
+    <!-- #########################      Task Section	######################### -->
+
+    <bean id="taskTool" class="com.momentumsystems.contentmanagement.TaskTool" parent="baseTaskContentManagmentTemplate">
+        <property name="complete">
+            <ref bean="completeTask"/>
+        </property>
+        <property name="reassign">
+            <ref bean="reassignTask"/>
+        </property>
+        <property name="accept">
+            <ref bean="acceptTask"/>
+        </property>
+        <property name="getTasks">
+            <ref bean="getTasks"/>
+        </property>
+        <property name="setComment">
+            <ref bean="setComment"/>
+        </property>
+        <property name="updateStepInstructions">
+            <ref bean="updateStepInstructions"/>
+        </property>
+        <property name="updateStepName">
+            <ref bean="updateStepName"/>
+        </property>
+    </bean>
+
+
+    <bean id="baseTaskContentManagmentTemplate" class="com.momentumsystems.livelinktools.task.BaseTaskLivelinkImpl" abstract="true">
+        <property name="systemInfo">
+            <ref bean="systemConfiguration"/>
+        </property>
+        <property name="messageManagement">
+            <ref bean="messageManagement"/>
+        </property>
+    </bean>
+
+    <bean id="completeTask" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="completeTaskTarget"/>
+        </property>
+    </bean>
+
+    <bean id="completeTaskTarget" class="com.momentumsystems.livelinktools.task.CompleteTaskLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="taskWorkflow">
+            <ref bean="getWorkflow"/>
+        </property>
+    </bean>
+
+    <bean id="reassignTask" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="reassignTaskTarget"/>
+        </property>
+    </bean>
+
+    <bean id="reassignTaskTarget" class="com.momentumsystems.livelinktools.task.ReassignTaskLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="taskWorkflow">
+            <ref bean="getWorkflow"/>
+        </property>
+    </bean>
+
+    <bean id="acceptTask" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="acceptTaskTarget"/>
+        </property>
+    </bean>
+
+    <bean id="acceptTaskTarget" class="com.momentumsystems.livelinktools.task.AcceptTaskLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="taskWorkflow">
+            <ref bean="getWorkflow"/>
+        </property>
+    </bean>
+
+    <bean id="getTasks" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="getTasksTarget"/>
+        </property>
+    </bean>
+
+    <bean id="getTasksTarget" class="com.momentumsystems.livelinktools.task.GetTasksLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="taskWorkflow">
+            <ref bean="getWorkflow"/>
+        </property>
+    </bean>
+
+    <bean id="setComment" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="setCommentTarget"/>
+        </property>
+    </bean>
+
+    <bean id="setCommentTarget" class="com.momentumsystems.livelinktools.task.SetCommentTaskLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="taskWorkflow">
+            <ref bean="getWorkflow"/>
+        </property>
+    </bean>
+
+    <bean id="updateStepInstructions" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="updateStepInstructionsTarget"/>
+        </property>
+    </bean>
+
+    <bean id="updateStepInstructionsTarget" class="com.momentumsystems.livelinktools.task.UpdateStepInstructionsLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="taskWorkflow">
+            <ref bean="getWorkflow"/>
+        </property>
+        <property name="livelinkJdbcTemplate">
+            <ref bean="livelinkJdbcTemplate"/>
+        </property>
+
+    </bean>
+
+    <bean id="updateStepName" parent="contentManagementProxyTemplate2">
+        <property name="target">
+            <ref local="updateStepNameTarget"/>
+        </property>
+    </bean>
+
+    <bean id="updateStepNameTarget" class="com.momentumsystems.livelinktools.task.UpdateStepNameLivelinkImpl" parent="baseWorkflowContentManagmentTemplate">
+        <property name="identityAdmin">
+            <ref bean="getIdentityTarget"/>
+        </property>
+        <property name="taskWorkflow">
+            <ref bean="getWorkflow"/>
+        </property>
+        <property name="livelinkJdbcTemplate">
+            <ref bean="livelinkJdbcTemplate"/>
+        </property>
+
+    </bean>
+
+    <bean id="baseAdviceTemplate" class="com.momentumsystems.livelink.exceptions.LivelinkThrowsAdvice" abstract="true">
+        <property name="systemInfo">
+            <ref bean="systemConfiguration"/>
+        </property>
+        <property name="messageManagement">
+            <ref bean="messageManagement"/>
+        </property>
+    </bean>
+
+    <bean id="retryAdvice" class="com.momentumsystems.livelink.exceptions.LivelinkRetryAroundAdvice" parent="baseAdviceTemplate"/>
+    <bean id="contentManagmentGeneralAdvice" class="com.momentumsystems.livelink.exceptions.LivelinkThrowsAdvice" parent="baseAdviceTemplate"/>
+
+
+    <bean id="contentManagmentAdvisorProxyTemplate" class="org.springframework.aop.support.DefaultPointcutAdvisor" abstract="true">
+        <property name="advice">
+            <ref local="retryAdvice"/>
+        </property>
+        <property name="pointcut">
+            <bean class="org.springframework.aop.support.NameMatchMethodPointcut">
+                <property name="mappedNames">
+                    <list>
+                        <value>*</value>
+                    </list>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="errorAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor" parent="contentManagmentAdvisorProxyTemplate">
+        <property name="advice">
+            <ref local="contentManagmentGeneralAdvice"/>
+        </property>
+    </bean>
+
+    <bean id="retryContentManagmentAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor" parent="contentManagmentAdvisorProxyTemplate">
+        <property name="advice">
+            <ref local="retryAdvice"/>
+        </property>
+    </bean>
+
+    <bean id="contentManagementProxyTemplate" class="org.springframework.aop.framework.ProxyFactoryBean" abstract="true">
+        <property name="interceptorNames">
+            <list>
+                <value>profileInterceptor</value>
+                <value>retryContentManagmentAdvisor</value>
+                <value>errorAdvisor</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>

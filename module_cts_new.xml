@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="module_cts_new" default="compile.module.cts_new">
+  <dirname property="module.cts_new.basedir" file="${ant.file.module_cts_new}"/>
+  
+  <property name="module.jdk.home.cts_new" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.cts_new" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.cts_new" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.cts_new" value="${compiler.args}"/>
+  
+  <property name="cts_new.output.dir" value="${module.cts_new.basedir}/build/web/WEB-INF/classes"/>
+  <property name="cts_new.testoutput.dir" value="${module.cts_new.basedir}/build/web/WEB-INF/classes"/>
+  
+  <path id="cts_new.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="cts_new.module.classpath">
+    <path refid="${module.jdk.classpath.cts_new}"/>
+    <path refid="library.jsf.classpath"/>
+    <pathelement location="${module.cts_new.basedir}/../applibs/java/lib/j2ee.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.cts_new">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.cts_new">
+    <patternset refid="excluded.from.module.cts_new"/>
+  </patternset>
+  
+  <path id="cts_new.module.sourcepath">
+    <dirset dir="${module.cts_new.basedir}">
+      <include name="conf"/>
+    </dirset>
+    <dirset dir="${module.cts_new.basedir}">
+      <include name="src"/>
+    </dirset>
+    <dirset dir="${module.cts_new.basedir}/../common-livelink">
+      <include name="src"/>
+      <include name="test"/>
+    </dirset>
+    <dirset dir="${module.cts_new.basedir}/../common-momentum">
+      <include name="src"/>
+    </dirset>
+    <dirset dir="${module.cts_new.basedir}/../livelinktools">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.cts_new" depends="compile.module.cts_new.production,compile.module.cts_new.tests" description="Compile module CTS_new"/>
+  
+  <target name="compile.module.cts_new.production" description="Compile module CTS_new; production classes">
+    <mkdir dir="${cts_new.output.dir}"/>
+    <javac2 destdir="${cts_new.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.cts_new}/javac">
+      <compilerarg line="${compiler.args.cts_new}"/>
+      <bootclasspath refid="cts_new.module.bootclasspath"/>
+      <classpath refid="cts_new.module.classpath"/>
+      <src refid="cts_new.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.cts_new"/>
+    </javac2>
+    
+    <copy todir="${cts_new.output.dir}">
+      <fileset dir="${module.cts_new.basedir}/conf">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.cts_new.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.cts_new.basedir}/../common-livelink/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.cts_new.basedir}/../common-livelink/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.cts_new.basedir}/../common-momentum/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.cts_new.basedir}/../livelinktools/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.cts_new.tests" depends="compile.module.cts_new.production" description="compile module CTS_new; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.cts_new" description="cleanup module">
+    <delete dir="${cts_new.output.dir}"/>
+    <delete dir="${cts_new.testoutput.dir}"/>
+  </target>
+  
+  <property name="cts_new.dir.exploded" value="${module.cts_new.basedir}/build/web"/>
+  <target name="j2ee.build.cts_new" depends="compile.module.cts_new" description="Build configured Java EE directories and archives for module 'CTS_new'">
+    <antcall target="j2ee.build.exploded.cts_new">
+      <param name="j2ee.dir.exploded" value="${cts_new.dir.exploded}"/>
+    </antcall>
+  </target>
+  
+  <!-- Call the target to build exploded directory for module 'CTS_new'.
+       Path to the exploded directory is specified by parameter 'j2ee.dir.exploded' -->
+  <target name="j2ee.build.exploded.cts_new" description="Build exploded directory for module 'CTS_new'">
+    <copy file="${module.cts_new.basedir}/../common-livelink/META-INF/context.xml" tofile="${j2ee.dir.exploded}/META-INF/context.xml"/>
+    <copy file="${module.cts_new.basedir}/WEB-INF/classes/META-INF/persistence.xml" tofile="${j2ee.dir.exploded}/WEB-INF/classes/META-INF/persistence.xml"/>
+    <copy file="${module.cts_new.basedir}/WEB-INF/web.xml" tofile="${j2ee.dir.exploded}/WEB-INF/web.xml"/>
+    <copy file="${module.cts_new.basedir}/lib/xml-apis.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/xml-apis.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/xercesImpl.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/xercesImpl.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/standard.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/standard.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/spring.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/spring.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/spring-mock.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/spring-mock.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/rowset.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/rowset.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/persistence.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/persistence.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/log4j-1.2.14.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/log4j-1.2.14.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/krysalis-jCharts-1.0.0-alpha-1.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/krysalis-jCharts-1.0.0-alpha-1.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/jta.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/jta.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/jstl.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/jstl.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/jsfcl.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/jsfcl.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/jsf-impl.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/jsf-impl.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/jsf-api.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/jsf-api.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/icefaces.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/icefaces.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/icefaces-facelets.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/icefaces-facelets.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/icefaces-comps.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/icefaces-comps.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/icefaces-ahs.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/icefaces-ahs.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/hsqldb.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/hsqldb.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/hibernate3.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/hibernate3.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/hibernate-entitymanager.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/hibernate-entitymanager.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/hibernate-annotations.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/hibernate-annotations.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/el-ri.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/el-ri.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/el-api.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/el-api.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/ehcache-1.2.3.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/ehcache-1.2.3.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/dom4j-1.6.1.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/dom4j-1.6.1.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/dataprovider.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/dataprovider.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/commons-logging.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/commons-logging.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/commons-lang.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/commons-lang.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/commons-fileupload.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/commons-fileupload.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/commons-digester.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/commons-digester.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/commons-collections.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/commons-collections.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/commons-beanutils.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/commons-beanutils.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/cglib-nodep-2.1_3.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/cglib-nodep-2.1_3.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/backport-util-concurrent.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/backport-util-concurrent.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/aspectjrt.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/aspectjrt.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/asm-util-2.2.2.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/asm-util-2.2.2.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/asm-commons-2.2.2.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/asm-commons-2.2.2.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/asm-2.2.2.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/asm-2.2.2.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/appbase.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/appbase.jar"/>
+    <copy file="${module.cts_new.basedir}/lib/antlr-2.7.6.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/antlr-2.7.6.jar"/>
+    <copy file="${module.cts_new.basedir}/../applibs/java/lib/junit.jar" tofile="${j2ee.dir.exploded}/WEB-INF/lib/junit.jar"/>
+    <copy todir="${j2ee.dir.exploded}/">
+      <fileset dir="${module.cts_new.basedir}/web"/>
+    </copy>
+    <copy todir="${j2ee.dir.exploded}/WEB-INF/classes">
+      <fileset dir="${module.cts_new.basedir}/conf/spring"/>
+    </copy>
+    <copy todir="${j2ee.dir.exploded}/WEB-INF/classes">
+      <fileset dir="${module.cts_new.basedir}/conf/hibernate"/>
+    </copy>
+    <copy todir="${j2ee.dir.exploded}/WEB-INF/classes">
+      <fileset dir="${module.cts_new.basedir}/conf/application"/>
+    </copy>
+    <copy todir="${j2ee.dir.exploded}/WEB-INF">
+      <fileset dir="${module.cts_new.basedir}/WEB-INF"/>
+    </copy>
+    <copy todir="${j2ee.dir.exploded}/WEB-INF/classes">
+      <fileset dir="${module.cts_new.basedir}/build/web/WEB-INF/classes"/>
+    </copy>
+  </target>
+  
+  <!-- Call the target to build war archive for module 'CTS_new'.
+       Path to the archive file is specified by parameter 'j2ee.path.jar' -->
+  <target name="j2ee.build.jar.cts_new" description="Build Java EE archive for module 'CTS_new'">
+    <dirname property="jar.dir" file="${j2ee.path.jar}"/>
+    <mkdir dir="${jar.dir}"/>
+    <jar destfile="${j2ee.path.jar}" duplicate="preserve">
+      <manifest>
+        <attribute name="Created-By" value="IntelliJ IDEA"/>
+        <attribute name="Manifest-Version" value="1.0"/>
+      </manifest>
+      <zipfileset dir="${module.cts_new.basedir}/build/web/WEB-INF/classes" prefix="WEB-INF/classes"/>
+      <zipfileset dir="${module.cts_new.basedir}/WEB-INF" prefix="WEB-INF"/>
+      <zipfileset dir="${module.cts_new.basedir}/conf/application" prefix="WEB-INF/classes"/>
+      <zipfileset dir="${module.cts_new.basedir}/conf/hibernate" prefix="WEB-INF/classes"/>
+      <zipfileset dir="${module.cts_new.basedir}/conf/spring" prefix="WEB-INF/classes"/>
+      <zipfileset dir="${module.cts_new.basedir}/web" prefix=""/>
+      <zipfileset file="${module.cts_new.basedir}/../applibs/java/lib/junit.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/antlr-2.7.6.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/appbase.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/asm-2.2.2.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/asm-commons-2.2.2.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/asm-util-2.2.2.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/aspectjrt.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/backport-util-concurrent.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/cglib-nodep-2.1_3.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/commons-beanutils.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/commons-collections.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/commons-digester.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/commons-fileupload.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/commons-lang.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/commons-logging.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/dataprovider.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/dom4j-1.6.1.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/ehcache-1.2.3.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/el-api.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/el-ri.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/hibernate-annotations.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/hibernate-entitymanager.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/hibernate3.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/hsqldb.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/icefaces-ahs.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/icefaces-comps.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/icefaces-facelets.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/icefaces.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/jsf-api.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/jsf-impl.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/jsfcl.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/jstl.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/jta.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/krysalis-jCharts-1.0.0-alpha-1.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/log4j-1.2.14.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/persistence.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/rowset.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/spring-mock.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/spring.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/standard.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/xercesImpl.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/lib/xml-apis.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${module.cts_new.basedir}/WEB-INF/web.xml" prefix="WEB-INF"/>
+      <zipfileset file="${module.cts_new.basedir}/WEB-INF/classes/META-INF/persistence.xml" prefix="WEB-INF/classes/META-INF"/>
+      <zipfileset file="${module.cts_new.basedir}/../common-livelink/META-INF/context.xml" prefix="META-INF"/>
+    </jar>
+  </target>
+</project>
