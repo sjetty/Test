@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * @author $Author: xlu $
- * @version $Revision: 1.1.1.1 $ $Date: 2009-10-29 15:54:36 $
+ * @version $Revision: 1.2 $ $Date: 2009-11-13 15:28:10 $
  */
 public class DncManagerBean extends AbstractSessionManagerBean
 {
@@ -40,11 +40,14 @@ public class DncManagerBean extends AbstractSessionManagerBean
         return action;
     }
 
-    public void browseHoldingBin() {
+    public String browseHoldingBin() {
+        String action = "newsClip";
         DncItem dncItem = (DncItem) getBean(DncItem.NAME);
+//        dncItem.getErrors().clear();
         dncItem.setHoldingBinFiles(dncBusinessObject.browseHoldingBin(dncItem));
         dncItem.setShowHoldingBin(true);
         setBean(DncItem.NAME, dncItem);
+        return action;
     }
 
     public void selectHoldingBinFile(){
@@ -61,18 +64,9 @@ public class DncManagerBean extends AbstractSessionManagerBean
         setBean(DncItem.NAME, dncItem);
     }
 
-    public String uploadFile() {
-        DncItem dncItem = (DncItem) getBean(DncItem.NAME);
+    public String uploadHoldingBinFile() {
         String action = "newsClip";
-        if (dncItem.getLocalFile() == null && dncItem.getHoldingBinFileName() == null)
-            return action;
-
-        if (dncItem.getLocalFile() != null) {
-            DncDocument dncDocument = new DncDocument();
-            dncDocument.setFile(dncItem.getLocalFile());
-            dncItem.setDncDocument(dncDocument);
-            dncItem.setLocalFile(null);
-        }
+        DncItem dncItem = (DncItem) getBean(DncItem.NAME);
         if (dncItem.getHoldingBinFileName() != null) {
             HoldingBinDocument hbDocument = new HoldingBinDocument();
             hbDocument.setId(dncItem.getHoldingBinFileId());
@@ -80,8 +74,21 @@ public class DncManagerBean extends AbstractSessionManagerBean
             hbDocument.setFetchUrl(dncItem.getHoldingBinFileUrl());
             dncItem.setHoldingBinDocument(hbDocument);
             dncItem.setHoldingBinFileName(null);
+            setBean(DncItem.NAME, dncItem);
         }
-        setBean(DncItem.NAME, dncItem);
+        return action;
+    }
+
+    public String uploadLocalFile() {
+        String action = "newsClip";
+        DncItem dncItem = (DncItem) getBean(DncItem.NAME);
+        if (dncItem.getLocalFile() != null) {
+            DncDocument dncDocument = new DncDocument();
+            dncDocument.setFile(dncItem.getLocalFile());
+            dncItem.setDncDocument(dncDocument);
+            dncItem.setLocalFile(null);
+            setBean(DncItem.NAME, dncItem);
+        }
         return action;
     }
 

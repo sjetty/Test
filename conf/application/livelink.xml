@@ -14,7 +14,7 @@
 		<attribute>
 			<name>host</name>
 			<type>java.lang.String</type>
-			<value>eeoc95dev.momentumsystems.com</value>
+			<value>w3keeocdev1v4</value>
 		</attribute>
 		<attribute>
 			<name>port</name>
@@ -24,7 +24,7 @@
 		<attribute>
 			<name>dftConnection</name>
 			<type>java.lang.String</type>
-			<value>ctslivelink</value>
+			<value>eeoclivelink1</value>
 		</attribute>
 		<attribute>
 			<name>user</name>
@@ -39,12 +39,12 @@
 		<attribute>
 			<name>baseURL</name>
 			<type>java.lang.String</type>
-            <value>http://eeoc95dev.momentumsystems.com/livelink/livelink.exe</value>
+            <value>http://w3keeocdev1v4.ad.mosys/livelink/livelink.exe</value>
 		</attribute>
 		<attribute>
 			<name>supportURL</name>
 			<type>java.lang.String</type>
-            <value>http://eeoc95dev.momentumsystems.com/livelinksupport</value>
+            <value>http://w3keeocdev1v4.ad.mosys/Livelink951support</value>
 		</attribute>
 
 

@@ -17,14 +17,30 @@
      <ui:define name="pageName"><ice:outputText  styleClass="pageName" value="Daily News Clips"/></ui:define>
      <ui:define name="faceletBody">
         <ice:form id="dncForm" style="margin: 0px; padding: 0px;">
-            <!--<table>-->
-            <!--<tr><td>-->
-                <!--<ice:inputTextarea cols='70' rows='5' style="color: red;" value="#{DncItem.errors}" rendered="#{!empty DncItem.errors}"/>-->
-            <!--</td></tr>-->
-            <!--</table>-->
+            <head>
+             <script type="text/javascript">
+                /* <![CDATA[ */
+                function confirmation()
+                {
+                    var where_to= confirm("Are you sure to cancel the submittal of the news clip?");
+                    if (where_to== true)
+                     {
+                       window.location="../dnc/index.jsf";
+                     }
+                }
+                /* ]]> */
+                </script>
+            </head>
+            <body>
+            <h:dataTable value="#{DncItem.errors}" var="item" rendered="#{!empty DncItem.errors}"
+                 columnClasses="errorClass" title="Error Messages">
+                <h:column>
+                    <h:outputText value="${item}"/>
+                </h:column>
+            </h:dataTable>
             <table>
                 <tr>
-                    <td><b><ice:outputLabel value="Submittal Type" for="submittalTypeCd"/></b></td>
+                    <td><b><ice:outputLabel value="*Submittal Type" for="submittalTypeCd"/></b></td>
                     <td><b><ice:outputLabel value="Page Count" for="pageCount"/></b></td>
                 </tr>
                 <tr>
@@ -34,12 +50,12 @@
                         </h:selectOneRadio>
                     </td>
                     <td>
-                        <ice:inputText id="pageCount" value="#{DncItem.pageCount}" />
+                        <ice:inputText id="pageCount" value="#{DncItem.pageCount}" size="5" maxlength="5"/>
                     </td>
                 </tr>
                 <tr>
-                    <td><b><ice:outputLabel value="Submittal Date" for="submittalDate" /></b></td>
-                    <td><b><ice:outputLabel value="Publication Date" for="publicDate" /></b></td>
+                    <td><b><ice:outputLabel value="*Submittal Date" for="submittalDate" /></b></td>
+                    <td><b><ice:outputLabel value="*Publication Date" for="publicDate" /></b></td>
                 </tr>
                 <tr>
                     <td>
@@ -66,18 +82,22 @@
                 <tr>
                     <td colspan="4"><hr/></td>
                 </tr>
+                <tr><td>Click "Upload" button after a file is selected</td></tr>
                 <tr>
                     <td>
                         <ice:inputText id="holdingBinFileLocation" value="#{DncItem.holdingBinFileName}" readonly="true"/>
-                        <ice:commandButton value="Browse Holding Bin" action="#{DncManagerBean.browseHoldingBin}" partialSubmit="true"/>
-                        <ice:commandButton value="upload" action="#{DncManagerBean.uploadFile}" partialSubmit="true"/>
+                        <ice:commandButton id="browseHB" value="Browse Holding Bin" action="#{DncManagerBean.browseHoldingBin}" partialSubmit="true"/>
+                        <ice:commandButton id="uploadHB" value="Upload Holding Bin File" action="#{DncManagerBean.uploadHoldingBinFile}" partialSubmit="true"/>
                     </td>
                 </tr>
                 <tr>
                     <td><ice:outputLabel for="addedBinFile" value="Holding Bin File to be uploaded:"
                                          rendered="#{!empty DncItem.holdingBinDocument and !empty DncItem.holdingBinDocument.fileName}"/>
-                    <ice:outputText id="addedBinFile" value="#{DncItem.holdingBinDocument.fileName}"
-                                        rendered="#{!empty DncItem.holdingBinDocument and !empty DncItem.holdingBinDocument.fileName}"/></td>
+                        <ice:outputLink value="#{DncItem.holdingBinDocument.fetchUrl}" title="#{DncItem.holdingBinDocument.fileName}">
+                            <ice:outputText id="addedBinFile" value="#{DncItem.holdingBinDocument.fileName}"
+                                        rendered="#{!empty DncItem.holdingBinDocument and !empty DncItem.holdingBinDocument.fileName}"/>
+                        </ice:outputLink>
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -115,7 +135,7 @@
                 </tr>
                 <tr>
                     <td><ice:inputFile id="localFileLocation" file="#{DncItem.localFile}" submitOnUpload="preAndPostUpload"
-                                       action="#{DncManagerBean.uploadFile}" title="Browse Local File" /></td>
+                                       action="#{DncManagerBean.uploadLocalFile}" title="Browse Local File" /></td>
                 </tr>
                 <tr>
                     <td><ice:outputLabel for="addedLocalFile" value="Local File to be uploaded:"
@@ -128,30 +148,30 @@
                 </tr>
                 <tr>
                     <td>
-                        <b><ice:outputLabel value="Description(optional)" /></b>
+                        <b><ice:outputLabel value="Description" /></b>(optional - 2000 characters)
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <ice:inputTextarea id="descTxt" cols="40" rows="5" value="#{DncItem.description}"/>
+                        <ice:inputTextarea id="descTxt" cols="50" rows="5" maxlength="2000" value="#{DncItem.description}" />
                     </td>
                 </tr>
                 <tr>
-                    <td align="right">
+                    <td colspan="4" align="right">
                         <ice:commandButton id = "dncSubmit" value="Submit to inSite >>" action="#{DncManagerBean.submitAction}"/>
                     </td>
                 </tr>
                 <tr><td><br/></td></tr>
                 <tr><td><br/></td></tr>
+            </table>
+            </body>
+            <h:dataTable value="#{DncItem.errors}" var="item" rendered="#{!empty DncItem.errors}"
+                 columnClasses="errorClass" title="Error Messages">
+                <h:column>
+                    <h:outputText value="${item}"/>
+                </h:column>
+            </h:dataTable>
 
-            </table>
-            <table>
-            <tr><td>
-            <!--added for inputtextarea messages-->
-                <ice:inputTextarea cols='70' rows='5' style="color: red;" value="#{DncItem.errors}" rendered="#{!empty DncItem.errors}"/>
-            </td></tr>
-            </table>
-            <br/><br/>
         </ice:form>
     </ui:define>
 </ui:composition>

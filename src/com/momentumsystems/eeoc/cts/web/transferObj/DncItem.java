@@ -14,7 +14,7 @@ import com.momentumsystems.livelink.User;
 
 /**
  * @author $Author: xlu $
- * @version $Revision: 1.1.1.1 $ $Date: 2009-10-29 15:54:36 $
+ * @version $Revision: 1.2 $ $Date: 2009-11-13 15:28:10 $
  */
 public class DncItem implements Serializable
 {
@@ -76,10 +76,14 @@ public class DncItem implements Serializable
 
     public boolean validate() {
         errors = new ArrayList<String>();
+        if (submittalTypeCd == null)
+            errors.add("Please enter Submittal Type");
         if (submittalDate == null)
             errors.add("Please enter Submittal Date");
         if (publicationDate == null)
             errors.add("Please enter Publication Date");
+        if (dncDocument == null && holdingBinDocument == null)
+            errors.add("Please attach a file either from the Holding Bin or Local File System");
         return errors.isEmpty();
     }
 

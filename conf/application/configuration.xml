@@ -3,7 +3,7 @@
 	<name>overall</name>
 	<configuration>
       <name>Application</name>
-      <configuration-file fileName="nvs.xml" />
+      <configuration-file fileName="cts.xml" />
     </configuration>
     <configuration>
 		<name>Connection</name>

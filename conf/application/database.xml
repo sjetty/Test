@@ -4,16 +4,16 @@
 	<attribute>
 		<name>default</name>
 		<type>java.lang.String</type>
-		<value>NVS</value>
+		<value>CTS</value>
 	</attribute>
         <attribute>
 		<name>livelink</name>
 		<type>java.lang.String</type>
-		<value>NVSLivelink</value>
+		<value>CTSLivelink</value>
 	</attribute>
 
     <configuration>
-		<name>NVS</name>
+		<name>CTS</name>
 		<attribute>
 			<name>driver</name>
 			<type>java.lang.String</type>
@@ -22,17 +22,17 @@
 		<attribute>
 			<name>url</name>
 			<type>java.lang.String</type>
-			<value>jdbc:oracle:thin:@eeoc95dev:1521:eeocdev</value>
+			<value>jdbc:oracle:thin:@10.0.0.79:1521:orcldev1</value>
 		</attribute>
 		<attribute>
 			<name>user</name>
 			<type>java.lang.String</type>
-			<value>NVS2</value>
+			<value>eeoccts_o1</value>
 		</attribute>
 		<attribute>
 			<name>password</name>
 			<type>java.lang.String</type>
-			<value>NVS2</value>
+			<value>ctsoeeoc</value>
 		</attribute>
         <attribute>
 			<name>dialect</name>
@@ -46,7 +46,7 @@
 		</attribute>
 	</configuration>
         <configuration>
-		<name>NVSLivelink</name>
+		<name>CTSLivelink</name>
 		<attribute>
 			<name>driver</name>
 			<type>java.lang.String</type>
@@ -55,12 +55,12 @@
 		<attribute>
 			<name>url</name>
 			<type>java.lang.String</type>
-			<value>jdbc:oracle:thin:@eeoc95dev:1521:eeocdev</value>
+			<value>jdbc:oracle:thin:@10.0.0.79:1521:orcldev1</value>
 		</attribute>
 		<attribute>
 			<name>user</name>
 			<type>java.lang.String</type>
-			<value>CTSLIVELINK</value>
+            <value>eeoclivelink1</value>
 		</attribute>
 		<attribute>
 			<name>password</name>

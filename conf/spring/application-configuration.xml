@@ -3,12 +3,12 @@
 
 <beans>
     <!--   This allows us to have the application.properties file in the classpath and overload those server specific properties -->
-    <bean id="placeHolderConfig" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer" abstract="false" singleton="true" lazy-init="default" autowire="default" dependency-check="default">
-        <property name="location">
-            <value>classpath:application.properties</value>
-        </property>
-        <property name="ignoreResourceNotFound" value="true" />
-    </bean>
+    <!--<bean id="placeHolderConfig" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer" abstract="false" singleton="true" lazy-init="default" autowire="default" dependency-check="default">-->
+        <!--<property name="location">-->
+            <!--<value>classpath:application.properties</value>-->
+        <!--</property>-->
+        <!--<property name="ignoreResourceNotFound" value="true" />-->
+    <!--</bean>-->
 
     <bean id="systemConfiguration" class="com.momentumsystems.eeoc.cts.util.system.CtsSystemInfoImpl" abstract="false" singleton="true" lazy-init="default" autowire="default" dependency-check="default">
         <property name="dateTimeFormatString" value="MM/dd/yyyy h:mm a"/>
@@ -19,20 +19,20 @@
 
 
 
-        <property name="maxResults" value="750"/>
-        <property name="litFolderId" value="144370"/>
-        <property name="nonLitFolderId" value="143994"/>
-        <property name="egFolderId" value="143994"/>
-        <property name="olFolderId" value="143994"/>
-        <property name="subFolderId" value="9387383"/>
-        <property name="acFolderId" value="144370"/>
-        <property name="ofoFolderId" value="144185"/>
-        <property name="ccFolderId" value="9387383"/>
-        <property name="cmFolderId" value="143994"/>
+        <!--<property name="maxResults" value="750"/>-->
+        <!--<property name="litFolderId" value="144370"/>-->
+        <!--<property name="nonLitFolderId" value="143994"/>-->
+        <!--<property name="egFolderId" value="143994"/>-->
+        <!--<property name="olFolderId" value="143994"/>-->
+        <!--<property name="subFolderId" value="9387383"/>-->
+        <!--<property name="acFolderId" value="144370"/>-->
+        <!--<property name="ofoFolderId" value="144185"/>-->
+        <!--<property name="ccFolderId" value="9387383"/>-->
+        <!--<property name="cmFolderId" value="143994"/>-->
 
 
-        <property name="esLITholdingBinId" value="144048"/>
-        <property name="esNLTholdingBinId" value="144049"/>
+        <!--<property name="esLITholdingBinId" value="144048"/>-->
+        <!--<property name="esNLTholdingBinId" value="144049"/>-->
         <!--<property name="esEGholdingBinId" value="0"/>
         <property name="esOLholdingBinId" value="0"/>
         <property name="esNLTholdingBinId" value="0"/>
@@ -43,8 +43,8 @@
         <property name="esCCholdingBinId" value="0"/>
         <property name="esCMholdingBinId" value="0"/>-->
 
-        <property name="ogcLITholdingBinId" value="144424"/>
-        <property name="ogcNLTholdingBinId" value="144425"/>
+        <!--<property name="ogcLITholdingBinId" value="144424"/>-->
+        <!--<property name="ogcNLTholdingBinId" value="144425"/>-->
         <!--<property name="ogcEGholdingBinId" value="0"/>
         <property name="ogcOLholdingBinId" value="0"/>
         <property name="ogcNLTholdingBinId" value="0"/>
@@ -55,14 +55,14 @@
         <property name="ogcCCholdingBinId" value="0"/>
         <property name="ogcCMholdingBinId" value="0"/>-->
 
-        <property name="holdSheetTemplateIdAc" value="7316603"/>
-        <property name="holdSheetTemplateIdOfo" value="10992617" />
-        <property name="holdSheetTemplateIdSub" value="10992727" />
-        <property name="ccTemplateId" value="8613911"/>
-        <property name="ccApproveTemplateId" value="0"/>
-        <property name="ofoTemplateId" value="0"/>
-        <property name="subTemplateId" value="0"/>
-        <property name="tempDirPath" value="c:\uploadTemp" />
+        <!--<property name="holdSheetTemplateIdAc" value="7316603"/>-->
+        <!--<property name="holdSheetTemplateIdOfo" value="10992617" />-->
+        <!--<property name="holdSheetTemplateIdSub" value="10992727" />-->
+        <!--<property name="ccTemplateId" value="8613911"/>-->
+        <!--<property name="ccApproveTemplateId" value="0"/>-->
+        <!--<property name="ofoTemplateId" value="0"/>-->
+        <!--<property name="subTemplateId" value="0"/>-->
+        <!--<property name="tempDirPath" value="c:\uploadTemp" />-->
 
         <property name="hibernateResourceBundle">
             <value>hibernate</value>
@@ -77,7 +77,7 @@
 			<value>xlu@momentumsystems.com</value>
 		</property>
         <property name="appBaseUrl">
-			<value>http://mosys34.momentumsystems.com:8280/</value>
+			<value>http://mosys34.ad.mosys:8280/</value>
 		</property>
         <property name="baseUrl">
 			<value>http://w3keeocdev1v4.ad.mosys/livelink/livelink.exe</value>
@@ -103,15 +103,15 @@
         <property name="livelinkObjectIdMacro">
             <value>::objectId::</value>
         </property>
-        <property name="nvsWorkflowMapId">
-            <value>8769451</value>
-        </property>
-        <property name="nnhWorkflowMapId">
-            <value>8807391</value>
-        </property>
-        <property name="ccWorkflowMapId">
-            <value>9072366</value>
-        </property>
+        <!--<property name="nvsWorkflowMapId">-->
+            <!--<value>8769451</value>-->
+        <!--</property>-->
+        <!--<property name="nnhWorkflowMapId">-->
+            <!--<value>8807391</value>-->
+        <!--</property>-->
+        <!--<property name="ccWorkflowMapId">-->
+            <!--<value>9072366</value>-->
+        <!--</property>-->
         <property name="domainObjectPath" value="com.momentumsystems.eeoc.cts.domain."/>
 
         <property name="dncUser">
