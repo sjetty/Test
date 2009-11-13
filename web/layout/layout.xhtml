@@ -924,16 +924,16 @@ helpWindow.focus()
 <table cellspacing="0" cellpadding="0" width="100%" border="0">
 <tr>
 <td rowspan="2"><img height="27" alt="" src="../common/images/global-menu-divider.gif" width="2" border="0" /></td>
-<td id="NVSGlobalMenu" height="24" style="background-image:url(../common/images/global-menu-bg.gif)" onclick="javascript:showGlobalMenu('NVS', 'NVSGlobalMenu' );return false">
-&nbsp;&nbsp;&nbsp;<a class="globalMenu" title="Select To Access NVS Menu" href="javascript:showGlobalMenu('', 'GlobalMenu' );return false" onclick="javascript:showGlobalMenu('NVS', 'NVSGlobalMenu' );return false" onmouseover="javascript:setArrowRed( 'NVS' )" onmouseout="javascript:setArrowBlack( 'NVS' )"><b>NVS</b>
-<img src="../common/images/global-down-arrow.gif" alt="Select To Access NVS Menu" hspace="3" width="5" align="middle" border="0" onmouseover="javascript:setArrowRed( 'NVS' )" onmouseout="javascript:setArrowBlack( 'NVS' )" id="NVSGlobalMenuImage" /></a>
-<!--<div id="NVS" class="menu">-->
-<!--<div id="NVS0" class="menuItem" onclick="javascript:menu_callback( '../menu/forward.jsf','');return false;"  onmouseover="javascript:hiLight('NVS0');doSubMenu( 'NVS0' )" onmouseout="javascript:loLight( 'NVS0')" style="width:100%;">-->
-<!--<a href="../menu/forward.jsf">NVS</a>-->
-<!--</div>-->
-<!--<div id="NVS1" class="menuItem" onclick="javascript:menu_callback( '../menu/forwardAdHoc.jsf','');return false;"  onmouseover="javascript:hiLight('NVS1');doSubMenu( 'NVS1' )" onmouseout="javascript:loLight( 'NVS1')" style="width:100%;">-->
-<!--<a href="../menu/forwardAdHoc.jsf">Ad Hoc Query</a>-->
-<!--</div>-->
+<td id="CTSGlobalMenu" height="24" style="background-image:url(../common/images/global-menu-bg.gif)" onclick="javascript:showGlobalMenu('CTS', 'CTSGlobalMenu' );return false">
+&nbsp;&nbsp;&nbsp;<a class="globalMenu" title="Select To Access CTS Menu" href="javascript:showGlobalMenu('', 'GlobalMenu' );return false" onclick="javascript:showGlobalMenu('CTS', 'CTSGlobalMenu' );return false" onmouseover="javascript:setArrowRed( 'CTS' )" onmouseout="javascript:setArrowBlack( 'CTS' )"><b>CTS</b>
+<img src="../common/images/global-down-arrow.gif" alt="Select To Access CTS Menu" hspace="3" width="5" align="middle" border="0" onmouseover="javascript:setArrowRed( 'CTS' )" onmouseout="javascript:setArrowBlack( 'CTS' )" id="CTSGlobalMenuImage" /></a>
+<div id="CTS" class="menu">
+<div id="CTS0" class="menuItem" onclick="javascript:menu_callback( '/ctsr/menu/forward.jsf','');return false;"  onmouseover="javascript:hiLight('CTS0');doSubMenu( 'CTS0' )" onmouseout="javascript:loLight( 'CTS0')" style="width:100%;">
+<a href="/ctsr/menu/forward.jsf">CTS</a>
+</div>
+<div id="CTS1" class="menuItem" onclick="javascript:menu_callback( '/ctsr/menu/forwardAdHoc.jsf','');return false;"  onmouseover="javascript:hiLight('CTS1');doSubMenu( 'CTS1' )" onmouseout="javascript:loLight( 'CTS1')" style="width:100%;">
+<a href="/ctsr/menu/forwardAdHoc.jsf">Ad Hoc Query</a>
+</div>
 <div class="lastItemHilite"><img src="../common/images/spacer.gif" alt="" width="1" height="1" /></div>
 </div>
 </td>
@@ -945,7 +945,7 @@ helpWindow.focus()
 <div id="Personal" class="menu">
 <div id="a00" class="menuItem" onclick="menu_callback('#{LivelinkBaseUrl}?func=ll&amp;objtype=142&amp;objaction=browse','');return false;" onmouseover="hiLight('a00');doSubMenu( 'a00' )" onmouseout="loLight( 'a00')" style="width:100%;">
 <h:outputLink value="#{LivelinkBaseUrl}?func=ll&amp;objtype=142&amp;objaction=browse">My Workspace</h:outputLink></div>
-<div id="a01" class="menuItem" onclick="menu_callback( '#{LivelinkServerUrl}/livelink/home.do?request=myhome.personal','');return false;" onmouseover="hiLight('a01');doSubMenu( 'a01' )" onmouseout="loLight( 'a01')" style="width:100%;"><h:outputLink value="#{LivelinkServerUrl}/livelink/home.do?request=myhome.personal">My Home</h:outputLink></div>
+<!--<div id="a01" class="menuItem" onclick="menu_callback( '#{LivelinkServerUrl}/livelink/home.do?request=myhome.personal','');return false;" onmouseover="hiLight('a01');doSubMenu( 'a01' )" onmouseout="loLight( 'a01')" style="width:100%;"><h:outputLink value="#{LivelinkServerUrl}/livelink/home.do?request=myhome.personal">My Home</h:outputLink></div>-->
 <div class="menuDivider"><img src="../common/images/spacer.gif" alt="" width="1" height="1" /></div>
 <div id="a03" class="menuItem" onclick="menu_callback( '#{LivelinkBaseUrl}?func=Personal.Assignments','');return false;"  onmouseover="hiLight('a03');doSubMenu( 'a03' )" onmouseout="loLight( 'a03')" style="width:100%;">
 <h:outputLink value="#{LivelinkBaseUrl}?func=Personal.Assignments">Assignments</h:outputLink></div>
@@ -958,9 +958,9 @@ helpWindow.focus()
 <div id="a06" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Personal.Favorites','');return false;"  onmouseover="javascript:hiLight('a06');doSubMenu( 'a06' )" onmouseout="javascript:loLight( 'a06')" style="width:100%;">
 <h:outputLink value="#{LivelinkBaseUrl}?func=Personal.Favorites">Favorites</h:outputLink>
 </div>
-<div id="a07" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Webexp.OfflineGetMarked','');return false;"  onmouseover="javascript:hiLight('a07');doSubMenu( 'a07' )" onmouseout="javascript:loLight( 'a07')" style="width:100%;">
-<h:outputLink value="#{LivelinkBaseUrl}?func=Webexp.OfflineGetMarked">Marked Items</h:outputLink>
-</div>
+<!--<div id="a07" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Webexp.OfflineGetMarked','');return false;"  onmouseover="javascript:hiLight('a07');doSubMenu( 'a07' )" onmouseout="javascript:loLight( 'a07')" style="width:100%;">-->
+<!--<h:outputLink value="#{LivelinkBaseUrl}?func=Webexp.OfflineGetMarked">Marked Items</h:outputLink>-->
+<!--</div>-->
 <div id="a08" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Personal.MyGroups','');return false;"  onmouseover="javascript:hiLight('a08');doSubMenu( 'a08' )" onmouseout="javascript:loLight( 'a08')" style="width:100%;">
 <h:outputLink value="#{LivelinkBaseUrl}?func=Personal.MyGroups">My Groups</h:outputLink>
 </div>
@@ -1009,12 +1009,12 @@ helpWindow.focus()
 <h:outputLink value="#{LivelinkBaseUrl}?func=user.listusers">Users &amp; Groups</h:outputLink>
 </div>
 <div class="menuDivider"><img src="../common/images/spacer.gif" alt="" width="1" height="1" /></div>
-<div id="a13" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Desktop.Desktop','');return false;"  onmouseover="javascript:hiLight('a13');doSubMenu( 'a13' )" onmouseout="javascript:loLight( 'a13')" style="width:100%;">
-<h:outputLink value="#{LivelinkBaseUrl}?func=Desktop.Desktop">Download Clients</h:outputLink>
-</div>
-<div id="a14" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Webexp.ExpOpenLLExplorer','');return false;"  onmouseover="javascript:hiLight('a14');doSubMenu( 'a14' )" onmouseout="javascript:loLight( 'a14')" style="width:100%;">
-<h:outputLink value="#{LivelinkBaseUrl}?func=Webexp.ExpOpenLLExplorer">Livelink Explorer</h:outputLink>
-</div>
+<!--<div id="a13" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Desktop.Desktop','');return false;"  onmouseover="javascript:hiLight('a13');doSubMenu( 'a13' )" onmouseout="javascript:loLight( 'a13')" style="width:100%;">-->
+<!--<h:outputLink value="#{LivelinkBaseUrl}?func=Desktop.Desktop">Download Clients</h:outputLink>-->
+<!--</div>-->
+<!--<div id="a14" class="menuItem" onclick="javascript:menu_callback( '#{LivelinkBaseUrl}?func=Webexp.ExpOpenLLExplorer','');return false;"  onmouseover="javascript:hiLight('a14');doSubMenu( 'a14' )" onmouseout="javascript:loLight( 'a14')" style="width:100%;">-->
+<!--<h:outputLink value="#{LivelinkBaseUrl}?func=Webexp.ExpOpenLLExplorer">Livelink Explorer</h:outputLink>-->
+<!--</div>-->
 <div class="lastItemHilite"><img src="../common/images/spacer.gif" alt="" width="1" height="1" /></div>
 </div>
 </td>
@@ -1072,12 +1072,12 @@ helpWindow.focus()
 </script>-->
 <td width="1" class="quicklinkBarDivider"><img height="30" alt="" src="../common/images/px.gif" width="1" /></td>
 <td class="quickLink"  nowrap="nowrap" valign="top">
-<!--<div>-->
-<!--<a href="javascript:menu_callback('../menu/forward.jsf', '' )" target="_self"><img src="../common/images/personal-workspace.gif" alt="NVS" height="11" hspace="5" width="11" border="0" />NVS</a>-->
-<!--</div>-->
-<!--<div>-->
-<!--<a href="javascript:menu_callback('../menu/forwardAdHoc.jsf', '' )" target="_self"><img src="../common/images/personal-workspace.gif" alt="NVS" height="11" hspace="5" width="11" border="0" />Ad Hoc Query</a>-->
-<!--</div>-->
+<div>
+<a href="javascript:menu_callback('/ctsr/menu/forward.jsf', '' )" target="_self"><img src="../common/images/personal-workspace.gif" alt="CTS" height="11" hspace="5" width="11" border="0" />CTS</a>
+</div>
+<div>
+<a href="javascript:menu_callback('/ctsr/menu/forwardAdHoc.jsf', '' )" target="_self"><img src="../common/images/personal-workspace.gif" alt="CTS" height="11" hspace="5" width="11" border="0" />Ad Hoc Query</a>
+</div>
 </td>
 <td width="1" class="quicklinkBarDivider"><img height="30" alt="" src="../common/images/px.gif" width="1" /></td>
 <td class="quickLink"  nowrap="nowrap" valign="top">
@@ -1085,7 +1085,7 @@ helpWindow.focus()
 <a href="javascript:menu_callback('#{LivelinkBaseUrl}%3Ffunc%3Dll%26objtype%3D142%26objaction%3Dbrowse', '' )" target="_self"><img src="../common/images/personal-workspace.gif" alt="My Workspace" height="11" hspace="5" width="11" border="0" />My Workspace</a>
 </div>
 <div>
-<a href="javascript:menu_callback('#{LivelinkServerUrl}%2Flivelink%2Fhome%2Edo%3Frequest%3Dmyhome%2Epersonal', '' )" target="_self"><img src="../common/images/personal-home.gif" alt="My Home" height="11" hspace="5" width="11" border="0" />My Home</a>
+<a href="javascript:menu_callback('#{LivelinkBaseUrl}?func=Personal.Favorites', '' )" target="_self"><img src="../common/images/personal-home.gif" alt="My Favorites" height="11" hspace="5" width="11" border="0" />Favorites</a>
 </div>
 </td>
 <td width="1" class="quicklinkBarDivider"><img height="30" alt="" src="../common/images/px.gif" width="1" /></td>
@@ -1164,7 +1164,7 @@ helpWindow.focus()
 <td class="livelinkVersionAndCopyright" nowrap="nowrap" style="background-image:url(../common/images/footer-back.gif)" >
 <img height="28" src="../common/images/px.gif" alt="" width="5" style="vertical-align:middle;" />
 &nbsp;
-Livelink &reg; Version 9.5.0, Copyright &copy; 1995-2005 Open Text Inc.  All rights reserved.
+Livelink &reg; Version 9.7.1, Copyright &copy; 1995-2007 Open Text Inc.  All rights reserved.
 </td>
 </tr>
 </table>
