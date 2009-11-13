@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="configuration.xsd">
+	<name>Livelink</name>
+	<attribute>
+		<name>default</name>
+		<type>java.lang.String</type>
+		<value>dev</value>
+	</attribute>
+
+    <!--  This section may be overridden in the application.properties file in the classpath -->
+
+    <configuration>
+		<name>dev</name>
+		<attribute>
+			<name>host</name>
+			<type>java.lang.String</type>
+			<value>w3keeocdev1v4</value>
+		</attribute>
+		<attribute>
+			<name>port</name>
+			<type>java.lang.Integer</type>
+			<value>2099</value>
+		</attribute>
+		<attribute>
+			<name>dftConnection</name>
+			<type>java.lang.String</type>
+			<value>eeoclivelink1</value>
+		</attribute>
+		<attribute>
+			<name>user</name>
+			<type>java.lang.String</type>
+			<value>Admin</value>
+		</attribute>
+		<attribute>
+			<name>password</name>
+			<type>com.momentumsystems.lang.EncryptedString</type>
+			<value>eeoc</value>
+		</attribute>
+		<attribute>
+			<name>baseURL</name>
+			<type>java.lang.String</type>
+            <value>http://w3keeocdev1v4.ad.mosys/livelink/livelink.exe</value>
+		</attribute>
+		<attribute>
+			<name>supportURL</name>
+			<type>java.lang.String</type>
+            <value>http://w3keeocdev1v4.ad.mosys/Livelink951support</value>
+		</attribute>
+
+
+        <attribute>
+            <name>userCacheTimeout</name>
+            <type>java.lang.Integer</type>
+            <value>-1</value>
+        </attribute>
+
+        <attribute>
+            <name>userCacheCapacity</name>
+            <type>java.lang.Integer</type>
+            <value>15000</value>
+        </attribute>
+
+        <attribute>
+            <name>groupCacheTimeout</name>
+            <type>java.lang.Integer</type>
+            <value>-1</value>
+        </attribute>
+
+        <attribute>
+            <name>groupCacheCapacity</name>
+            <type>java.lang.Integer</type>
+            <value>15000</value>
+        </attribute>
+
+    </configuration>
+
+</configuration>
