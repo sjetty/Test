@@ -34,7 +34,7 @@
             <value>oracle.jdbc.driver.OracleDriver</value>
         </property>
         <property name="jdbcUrl">
-            <value>jdbc:oracle:thin:@eeoc95dev:1521:eeocdev</value>
+            <value>jdbc:oracle:thin:@201.1.24.120:1525:PROD</value>
         </property>
         <property name="user" value="CTSLIVELINK"/>
         <property name="password" value="CTSLIVELINK"/>
@@ -145,7 +145,7 @@
             <value>oracle.jdbc.driver.OracleDriver</value>
         </property>
         <property name="jdbcUrl">
-            <value>jdbc:oracle:thin:@eeoc95dev:1521:eeocdev</value>
+            <value>jdbc:oracle:thin:@201.1.24.120:1525:PROD</value>
         </property>
         <property name="user" value="cts_o"/>
         <property name="password" value="ctsoeeoc"/>

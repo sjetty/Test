@@ -3,12 +3,12 @@
 
 <beans>
     <!--   This allows us to have the application.properties file in the classpath and overload those server specific properties -->
-    <bean id="placeHolderConfig" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer" abstract="false" singleton="true" lazy-init="default" autowire="default" dependency-check="default">
-        <property name="location">
-            <value>classpath:application.properties</value>
-        </property>
-        <property name="ignoreResourceNotFound" value="true" />
-    </bean>
+    <!--<bean id="placeHolderConfig" class="org.springframework.beans.factory.config.PropertyOverrideConfigurer" abstract="false" singleton="true" lazy-init="default" autowire="default" dependency-check="default">-->
+        <!--<property name="location">-->
+            <!--<value>classpath:application.properties</value>-->
+        <!--</property>-->
+        <!--<property name="ignoreResourceNotFound" value="true" />-->
+    <!--</bean>-->
 
     <bean id="systemConfiguration" class="com.momentumsystems.eeoc.cts.util.system.CtsSystemInfoImpl" abstract="false" singleton="true" lazy-init="default" autowire="default" dependency-check="default">
         <property name="dateTimeFormatString" value="MM/dd/yyyy h:mm a"/>
