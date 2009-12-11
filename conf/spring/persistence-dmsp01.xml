@@ -36,8 +36,8 @@
         <property name="jdbcUrl">
             <value>jdbc:oracle:thin:@201.1.24.120:1525:PROD</value>
         </property>
-        <property name="user" value="CTSLIVELINK"/>
-        <property name="password" value="CTSLIVELINK"/>
+        <property name="user" value="livelink"/>
+        <property name="password" value="livelinkeeoc"/>
 
         <!-- c3p0 http://www.mchange.com/projects/c3p0/index.html -->
         <property name="acquireIncrement" value="5"/>
