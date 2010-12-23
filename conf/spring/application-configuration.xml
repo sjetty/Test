@@ -74,7 +74,7 @@
 			<value>NVS Automation</value>
 		</property>
         <property name="contactEmail">
-			<value>xlu@momentumsystems.com</value>
+			<value>xlu@uspss.opentext.com</value>
 		</property>
         <property name="appBaseUrl">
 			<value>http://mosys34.ad.mosys:8280/</value>

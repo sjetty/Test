@@ -31,7 +31,7 @@
 			<value>NVS Automation</value>
 		</property>
         <property name="contactEmail">
-			<value>eeocsuport@momentumsystems.com</value>
+			<value>dms.support@eeoc.gov</value>
 		</property>
         <property name="appBaseUrl">
 			<value>http://dms/CTS_new/</value>
